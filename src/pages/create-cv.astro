@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import CV from "../components/cv";
+
+const cvInfo = {
+	name: "John Doe",
+	title: "Software Engineer",
+	email: "john@doe.com",
+	phone: "+1 234 567 890",
+
+	experience: [
+		{
+			company: "Company 1",
+			role: "Software Engineer",
+			startDate: "2019-01-01",
+			endDate: "2020-01-01",
+			description:
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nunc.",
+		},
+		{
+			company: "Company 2",
+			role: "Software Engineer",
+			startDate: "2018-01-01",
+			endDate: "2019-01-01",
+			description:
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nunc.",
+		},
+		{
+			company: "Company 3",
+			role: "Software Engineer",
+			startDate: "2017-01-01",
+			endDate: "2018-01-01",
+			description:
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nunc.",
+		},
+	],
+};
+---
+
+<Layout>
+	<CV template="minimal" info={cvInfo} className="w-2/5" />
+</Layout>
