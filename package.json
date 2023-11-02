@@ -7,8 +7,7 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro",
-		"prepare": "husky install"
+		"astro": "astro"
 	},
 	"dependencies": {
 		"@astrojs/react": "^3.0.4",
@@ -20,15 +19,11 @@
 		"tailwindcss": "^3.0.24"
 	},
 	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.10",
 		"@types/react": "^18.2.21",
 		"@types/react-dom": "^18.2.7",
-		"husky": "^8.0.0",
-		"lint-staged": "^15.0.2",
 		"prettier": "^3.0.3",
 		"prettier-plugin-astro": "^0.12.1",
 		"prettier-plugin-tailwindcss": "^0.5.6"
-	},
-	"lint-staged": {
-		"*.{js,jsx,css,md,astro}": "prettier --write"
 	}
 }

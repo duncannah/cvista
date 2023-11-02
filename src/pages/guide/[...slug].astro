@@ -1,0 +1,57 @@
+---
+import {getCollection} from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+	const blogEntries = await getCollection("guide");
+
+	return blogEntries.map((entry) => ({
+		params: {slug: entry.slug.substring(3)},
+		props: {entry},
+	}));
+}
+
+const paths = await getStaticPaths();
+
+const {entry} = Astro.props;
+const {Content} = await entry.render();
+---
+
+<Layout>
+	<div class="content flex flex-grow px-0">
+		<div class="sidebar h-auto justify-start rounded-xl">
+			<div class="sidebar-title p-4">Guide de rédaction de CV</div>
+
+			<div class="sidebar-content h-fit">
+				<div class="menu">
+					<div class="menu-section p-4">
+						<span class="menu-title">Pages</span>
+						<ul class="menu-items">
+							{
+								paths.map((page) => (
+									<li>
+										<a
+											href={`/guide/${page.params.slug}`}
+											class={`menu-item ${
+												page.params.slug ===
+												entry.slug.substring(3)
+													? "menu-active"
+													: ""
+											}`}
+										>
+											{page.props.entry.data.title}
+										</a>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content prose prose-neutral dark:prose-invert flex-grow">
+			<h1>{entry.data.title}</h1>
+			<Content />
+		</div>
+	</div>
+</Layout>

@@ -3,7 +3,44 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<p>Hello World</p>
+	<div
+		class="w-full bg-gradient-to-r from-violet-950 to-pink-900 py-32 text-white"
+	>
+		<div class="mx-auto flex w-full flex-col gap-8 md:w-[40rem]">
+			<div class="text-6xl font-bold">CVista</div>
+			<div class="text-2xl font-light">
+				Créez des CV qui captivent, inspirent et ouvrent des portes vers
+				de nouvelles opportunités professionnelles.
+			</div>
+			<div
+				class="flex items-center justify-between
+				[&>*:hover]:bg-white [&>*:hover]:text-pink-900 [&>*]:cursor-pointer [&>*]:rounded-full [&>*]:border-2 [&>*]:border-white [&>*]:px-6 [&>*]:py-3
+				[&>*]:text-xl [&>*]:transition"
+			>
+				<a href="./guide/start">Guide de rédaction</a>
+				<a href="./create-cv">Créer un CV maintenant -&gt;</a>
+			</div>
+		</div>
+	</div>
 
-	<a class="link" href="./create-cv">Create CV</a>
+	<div class="content flex flex-col gap-12">
+		<p>
+			Votre prochaine opportunité professionnelle commence ici. CVista
+			simplifie la création de CV. Choisissez un modèle, personnalisez-le
+			à votre goût, ajoutez vos informations et obtenez un CV
+			professionnel en quelques clics.
+		</p>
+
+		<ul class="flex flex-col gap-2">
+			<li>🚀 Facile, rapide et gratuit !</li>
+			<li>📄 Choisissez parmi nos superbes modèles.</li>
+			<li>🎨 Personnalisez votre CV à votre goût.</li>
+		</ul>
+
+		<p>
+			Démarquez-vous dans la recherche d'emploi dès aujourd'hui.
+			Inscrivez-vous gratuitement et mettez en valeur vos compétences et
+			votre expérience avec un CV CVista.
+		</p>
+	</div>
 </Layout>
