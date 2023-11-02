@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 import CVMinimal from "../components/cvs/CVMinimal";
 
 export default function CV(props) {
@@ -7,20 +5,25 @@ export default function CV(props) {
 
 	return (
 		<div
+			{...props}
 			className={`
-			bg-white text-black
-			w-[210mm]
-			aspect-[1/1.414]
+			aspect-[1/1.414] w-[210mm]
+			bg-white
+			text-black
 			${props.className || ""}
 		`}
 		>
 			<svg
 				width="100%"
 				height="100%"
-				viewBox="0 0 840 1188"
+				viewBox="0 0 840 1188" // Magic number where 1rem matches 11pt font
 				preserveAspectRatio="xMinYMin meet"
 			>
-				<foreignObject width="100%" height="100%" xmlns="http://www.w3.org/1999/xhtml">
+				<foreignObject
+					width="100%"
+					height="100%"
+					xmlns="http://www.w3.org/1999/xhtml"
+				>
 					{props.template === "minimal" ? (
 						<CVMinimal info={props.info} />
 					) : (
