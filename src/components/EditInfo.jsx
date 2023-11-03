@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 
 
 const EditInfo = (props) => {
-	const [userData, setUserData] = useState(null);
+	const [userData, setUserData] = useState({"name": "", "title": "", "email": "", "phone": "", "experience": []});
 	const [experience, setExperience] = useState({});
 	// load values from localStorage
 	useEffect(() => {
-		setUserData(JSON.parse(localStorage.getItem("userData")));
+		if (localStorage.getItem("userData")) {
+			setUserData(JSON.parse(localStorage.getItem("userData")));
+		}
 	}, []); // [] forces useEffect to only run once.
 
 	// update localStorage when userData is updated. Sort of.
@@ -18,21 +20,24 @@ const EditInfo = (props) => {
 	});
 
 
-	if (userData === null) {
-		return (<h5>Loading data</h5>);
-	}
 
 	const updateName = () => {
 		setUserData({...userData, "name": event.target.value});
 	}
 	const updateTitle = () => {
 		setUserData({...userData, "title": event.target.value});
-
 	}
+	const updateEmail = () => {
+		setUserData({...userData, "email": event.target.value})
+	}
+	const updatePhone = () => {
+		setUserData({...userData, "phone": event.target.value})
+	}
+
 
 	const submitExperience = () => {
 		setUserData({...userData, "experience": [...userData.experience, experience]})
-		setExperience({"company": "", "role": "", "startDate": "", "endDate": ""})
+		setExperience({"company": "", "role": "", "startDate": "", "endDate": "", "description": ""})
 	}
 
 	const updateExperience = () => {
@@ -55,6 +60,8 @@ const EditInfo = (props) => {
 			<form>
 				<input type="text" value={userData.name || ""} onChange={updateName} placeholder="your name" name="name"/>
 				<input type="text" value={userData.title || ""} onChange={updateTitle} placeholder="your title" name="title"/>
+				<input type="email" value={userData.email || ""} onChange={updateEmail} placeholder="your email" name="email"/>
+				<input type="text" value={userData.phone || ""} onChange={updatePhone} placeHolder="your phone number" name="phone"/>
 			</form>
 			<table>
 				<thead>
@@ -63,6 +70,7 @@ const EditInfo = (props) => {
 						<th>Role</th>
 						<th>date de début</th>
 						<th>date de fin</th>
+						<th>description</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -84,6 +92,7 @@ const EditInfo = (props) => {
 				<input type="text" placeholder="Role" name="role" value={experience.role}/>
 				<input type="text" placeholder="date de début" name="startDate" value={experience.startDate}/>
 				<input type="text" placeholder="date de fin" name="endDate" value={experience.endDate}/>
+				<input type="text" placeholder="description" name="description" value={experience.description}/>
 				<input type="button" value="+" onClick={submitExperience}/>
 			</form>
 		</div>
