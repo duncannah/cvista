@@ -61,7 +61,10 @@ const cvInfo = {
 			display: none !important;
 		}
 
-		*:has(#cv),
+		/* Can't use :has (thanks Firefox) */
+		/* *:has(#cv), */
+		body > main,
+		body > main > div,
 		#cv {
 			display: block !important;
 		}
