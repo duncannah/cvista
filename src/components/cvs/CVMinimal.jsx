@@ -6,8 +6,8 @@ export default function CVMinimal({ info }) {
 	return (
 		<div className="p-4 flex flex-col gap-8">
 			<div>
-				<h1 className="text-3xl font-bold">{info.name}</h1>
-				<h2 className="text-xl font-bold">{info.title}</h2>
+				<h1 className="text-3xl font-bold">{info.name || "no name"}</h1>
+				<h2 className="text-xl font-bold">{info.title || "no title"}</h2>
 				<ul>
 					{info.address && <li className="text-sm">{info.address}</li>}
 					{info.phone && <li className="text-sm">{info.phone}</li>}

@@ -9,7 +9,6 @@ export default function CV(props) {
 		setUserData(data);
 	}, []); // [] forces useEffect to only execute once on loading
 	
-	console.log(userData)
 
 	// The SVG element lets us scale the CV content with the container
 
