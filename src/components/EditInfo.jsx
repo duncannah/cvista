@@ -21,19 +21,9 @@ const EditInfo = (props) => {
 
 
 
-	const updateName = () => {
-		setUserData({...userData, "name": event.target.value});
+	const updateUser = () => {
+		setUserData({...userData, [event.target.name]: event.target.value})
 	}
-	const updateTitle = () => {
-		setUserData({...userData, "title": event.target.value});
-	}
-	const updateEmail = () => {
-		setUserData({...userData, "email": event.target.value})
-	}
-	const updatePhone = () => {
-		setUserData({...userData, "phone": event.target.value})
-	}
-
 
 	const submitExperience = () => {
 		setUserData({...userData, "experience": [...userData.experience, experience]})
@@ -57,11 +47,11 @@ const EditInfo = (props) => {
 
 	return (
 		<div class="center">
-			<form>
-				<input type="text" value={userData.name || ""} onChange={updateName} placeholder="your name" name="name"/>
-				<input type="text" value={userData.title || ""} onChange={updateTitle} placeholder="your title" name="title"/>
-				<input type="email" value={userData.email || ""} onChange={updateEmail} placeholder="your email" name="email"/>
-				<input type="text" value={userData.phone || ""} onChange={updatePhone} placeHolder="your phone number" name="phone"/>
+			<form onChange={updateUser}>
+				<input type="text" value={userData.name || ""} placeholder="your name" name="name"/>
+				<input type="text" value={userData.title || ""} placeholder="your title" name="title"/>
+				<input type="email" value={userData.email || ""} placeholder="your email" name="email"/>
+				<input type="text" value={userData.phone || ""} placeHolder="your phone number" name="phone"/>
 			</form>
 			<table>
 				<thead>
