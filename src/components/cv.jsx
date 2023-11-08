@@ -1,6 +1,15 @@
 import CVMinimal from "../components/cvs/CVMinimal";
+import React, { useState, useEffect } from "react";
 
 export default function CV(props) {
+	const [userData, setUserData] = useState(null);
+
+	useEffect(() => {
+		const data = JSON.parse(localStorage.getItem("userData")) || props.info;
+		setUserData(data);
+	}, []); // [] forces useEffect to only execute once on loading
+	
+
 	// The SVG element lets us scale the CV content with the container
 
 	return (
@@ -24,11 +33,14 @@ export default function CV(props) {
 					height="100%"
 					xmlns="http://www.w3.org/1999/xhtml"
 				>
-					{props.template === "minimal" ? (
-						<CVMinimal info={props.info} />
-					) : (
-						<>Unknown template: {props.template}</>
-					)}
+					{ userData !== null ? 
+						( props.template === "minimal" ? 
+							( <CVMinimal info={userData} /> ) : 
+							( <>Unknown template: {props.template}</> ) ) :
+						( <h5>loading data</h5> )
+						// This is aweful.
+					}
+					
 				</foreignObject>
 			</svg>
 		</div>
