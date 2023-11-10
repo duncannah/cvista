@@ -28,6 +28,15 @@ export default function CVMinimal({ info }) {
 					</div>
 				))}
 			</div>
+			<div>
+				<h3 className="text-xl font-bold">Skills</h3>
+				<ul>
+					{info.skills.map((skill) => (
+						<li className="text-lg">{skill}</li>
+					))}
+				</ul>
+				
+			</div>
 		</div>
 	);
 }

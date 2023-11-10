@@ -14,8 +14,10 @@ const centeredInput = {
 
 
 const EditInfo = (props) => {
-	const [userData, setUserData] = useState({"name": "", "title": "", "email": "", "phone": "", "experience": []});
+	const [userData, setUserData] = useState({"name": "", "title": "", "email": "", "phone": "", "experience": [], "skills": ["jeej"]});
 	const [experience, setExperience] = useState({});
+	const [skill, setSkill] = useState("");
+	
 	// load values from localStorage
 	useEffect(() => {
 		if (localStorage.getItem("userData")) {
@@ -28,7 +30,6 @@ const EditInfo = (props) => {
 		if (userData !== null) {
 			localStorage.setItem("userData", JSON.stringify(userData));
 		}
-		console.log("refreshed")
 	});
 
 
@@ -56,15 +57,37 @@ const EditInfo = (props) => {
 		setUserData({...userData, "experience": newExperiences})
 	}
 
+	const updateSkill = () => {
+		setSkill(event.target.value);
+	}
+
+	const submitSkill = () => {
+		console.log(skill)
+		setUserData({...userData, "skills": [...userData.skills, skill]});
+		//setSkill("");
+	}
+
+	const deleteSkill = () => {
+		const newSkills = []
+		for (let i in userData.skills) {
+			if(i != event.target.value) {
+				newSkills.push(userData.skills[i]);
+			}
+		}
+		setUserData({...userData, "skills": newSkills});
+	} 
+
 
 	return (
 		<div style={centered}>
+			<h3 className="text-lg font-bold">Informations générales</h3>
 			<form style={{...centered, "display": "flex", "flex-direction": "column"}}onChange={updateUser}>
 				<input type="text" value={userData.name || ""} placeholder="your name" name="name" style={{...centeredInput, "width": "50%"}}/>
 				<input type="text" value={userData.title || ""} placeholder="your title" name="title" style={{...centeredInput, "width": "50%"}}/>
 				<input type="email" value={userData.email || ""} placeholder="your email" name="email" style={{...centeredInput, "width": "50%"}}/>
-				<input type="text" value={userData.phone || ""} placeHolder="your phone number" name="phone" style={{...centeredInput, "width": "50%"}}/>
+				<input type="text" value={userData.phone || ""} placeholder="your phone number" name="phone" style={{...centeredInput, "width": "50%"}}/>
 			</form>
+			<h3 className="text-lg font-bold">Experiences</h3>
 			<form onChange={updateExperience} style={centered}>
 				<table style={centered}>
 					<thead>
@@ -98,6 +121,28 @@ const EditInfo = (props) => {
 						</tr>
 					</tbody>
 				</table>
+			</form>
+
+			<h3 className="text-lg font-bold">Capacités</h3>
+			<form style={{...centered, "display": "flex", "flex-direction": "column"}}>
+				<table className="w-1/2 m-auto">
+						{userData.skills.map((text, index) => (
+							<tr>
+								<td>{text}</td>
+								<td><button onClick={deleteSkill} value={index} style={centeredInput}> - </button></td>
+							</tr>
+						))}
+					<tr>
+						<td><input type="text" style={{...centeredInput, "width": "50%"}} onChange={updateSkill} value={skill} placeholder="capacité"/></td>
+						<td><button onClick={submitSkill} style={centeredInput}> + </button></td>
+					</tr>
+
+				</table>
+					
+					<div className="m-auto flex flew-row">
+						
+					</div>
+					
 			</form>
 		</div>
 	);
