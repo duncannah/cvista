@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-const centered = {
-	"justify-content": "center",
-	"align-items": "middle",
-	"margin": "0.5em auto",
-}
-const centeredInput = {
-	...centered,
-	"padding-left": "0.5rem",
-	"border-radius": "0.9rem",
-	"border": "solid deepskyblue 2px",
-}
 
 
 const EditInfo = (props) => {
@@ -79,17 +68,21 @@ const EditInfo = (props) => {
 
 
 	return (
-		<div style={centered}>
+		<div className="flex flex-col m-auto justify-center">
 			<h3 className="text-lg font-bold">Informations générales</h3>
-			<form style={{...centered, "display": "flex", "flex-direction": "column"}}onChange={updateUser}>
-				<input type="text" value={userData.name || ""} placeholder="your name" name="name" style={{...centeredInput, "width": "50%"}}/>
-				<input type="text" value={userData.title || ""} placeholder="your title" name="title" style={{...centeredInput, "width": "50%"}}/>
-				<input type="email" value={userData.email || ""} placeholder="your email" name="email" style={{...centeredInput, "width": "50%"}}/>
-				<input type="text" value={userData.phone || ""} placeholder="your phone number" name="phone" style={{...centeredInput, "width": "50%"}}/>
+			<form className="flex flex-col justify-center w-1/2 m-auto" onChange={updateUser}>
+				<input type="text" value={userData.name || ""} placeholder="your name" name="name" 
+					className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"/>
+				<input type="text" value={userData.title || ""} placeholder="your title" name="title" 
+					className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100" />
+				<input type="email" value={userData.email || ""} placeholder="your email" name="email" 
+					className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100" />
+				<input type="text" value={userData.phone || ""} placeholder="your phone number" name="phone" 
+					className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100" />
 			</form>
 			<h3 className="text-lg font-bold">Experiences</h3>
-			<form onChange={updateExperience} style={centered}>
-				<table style={centered}>
+			<form onChange={updateExperience} >
+				<table>
 					<thead>
 						<tr>
 							<th>Entreprise</th>
@@ -108,40 +101,57 @@ const EditInfo = (props) => {
 							<td>{experience.startDate}</td>
 							<td>{experience.endDate}</td>
 							<td>{experience.description}</td>
-							<td><button onClick={deleteExperience} value={index} style={{...centeredInput, "width": "1.5rem", "padding": "0.5rem"}}> - </button></td>
+							<td><button onClick={deleteExperience} value={index}
+								className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+							> - </button></td>
 						</tr>
 					))}
-						<tr>
-							<td><input type="text" placeholder="Entreprise" name="company" value={experience.company} style={centeredInput}/></td>
-							<td><input type="text" placeholder="Role" name="role" value={experience.role} style={centeredInput}/></td>
-							<td><input type="text" placeholder="date de début" name="startDate" value={experience.startDate} style={centeredInput}/></td>
-							<td><input type="text" placeholder="date de fin" name="endDate" value={experience.endDate} style={centeredInput}/></td>
-							<td><input type="text" placeholder="description" name="description" value={experience.description} style={centeredInput}/></td>
-							<td><input type="button" value="+" onClick={submitExperience} style={{...centeredInput, "width": "1.5rem", "padding": "0.5rem"}}/></td>
+						<tr class="border-top border-solid border-1">
+							<td><input type="text" placeholder="Entreprise" name="company" value={experience.company} 
+								className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+							/></td>
+							<td><input type="text" placeholder="Role" name="role" value={experience.role} 
+								className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+							/></td>
+							<td><input type="text" placeholder="date de début" name="startDate" value={experience.startDate} 
+								className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+							/></td>
+							<td><input type="text" placeholder="date de fin" name="endDate" value={experience.endDate} 
+								className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+							/></td>
+							<td><input type="text" placeholder="description" name="description" value={experience.description} 
+								className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+							/></td>
+							<td><input type="button" value="+" onClick={submitExperience} 
+								className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+							/></td>
 						</tr>
 					</tbody>
 				</table>
 			</form>
 
 			<h3 className="text-lg font-bold">Capacités</h3>
-			<form style={{...centered, "display": "flex", "flex-direction": "column"}}>
+			<form>
 				<table className="w-1/2 m-auto">
 						{userData.skills.map((text, index) => (
 							<tr>
 								<td>{text}</td>
-								<td><button onClick={deleteSkill} value={index} style={centeredInput}> - </button></td>
+								<td><button onClick={deleteSkill} value={index}
+									className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+								> - </button></td>
 							</tr>
 						))}
 					<tr>
-						<td><input type="text" style={{...centeredInput, "width": "50%"}} onChange={updateSkill} value={skill} placeholder="capacité"/></td>
-						<td><button onClick={submitSkill} style={centeredInput}> + </button></td>
+						<td><input type="text" onChange={updateSkill} value={skill} placeholder="capacité"
+							className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+						/></td>
+						<td><button onClick={submitSkill} 
+							className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
+						> + </button></td>
 					</tr>
 
 				</table>
 					
-					<div className="m-auto flex flew-row">
-						
-					</div>
 					
 			</form>
 		</div>
