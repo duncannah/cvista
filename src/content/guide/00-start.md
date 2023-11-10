@@ -2,7 +2,7 @@
 title: "Bienvenue sur le guide!"
 ---
 
-Bienvenue sur le guide de rédaction de CV par **CVista**. Ce guide est destiné à vous aider à rédiger un CV qui vous permettra de vous démarquer des autres candidats. Il est divisé en plusieurs sections, chacune d'entre elles étant consacrée à un aspect particulier de la rédaction d'un CV. Vous pouvez naviguer dans le guide en utilisant le menu de gauche.
+Bienvenue sur le guide ultime de rédaction de CV par **CVista**! Dans ce guide détaillé, nous allons explorer tous les aspects de la création d'un CV exceptionnel qui attirera l'attention des employeurs et vous démarquera parmi les candidats. Suivez nos conseils et astuces pour créer un CV professionnel et percutant qui vous ouvrira les portes des opportunités professionnelles.
 
 ## À propos de CVista
 
