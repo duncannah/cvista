@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 
 import CV from "../components/cv";
+import EditInfo from "../components/EditInfo.jsx";
 
 const cvInfo = {
 	name: "John Doe",
@@ -39,7 +40,8 @@ const cvInfo = {
 ---
 
 <Layout>
-	<div class="content flex">
+	<div class="content flex flex-row">
+		<EditInfo class="w-1/2" width="half" client:load/>
 		<CV template="minimal" info={cvInfo} className="w-2/5" id="cv" client:load/>
 	</div>
 </Layout>
