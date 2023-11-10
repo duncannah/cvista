@@ -36,13 +36,19 @@ const cvInfo = {
 			description:
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nunc.",
 		},
+		],
+	skills: [
+		"skill 1",
+		"skill 2",
+		"skill 3",
+		"skill 4",
 	],
 };
 ---
 
 <Layout>
 	<div class="content flex flex-row">
-		<EditInfo class="w-1/2" width="half" client:load/>
+		<EditInfo class="w-1/2" width="half" info={cvInfo} client:load/>
 		<CV template="minimal" info={cvInfo} className="w-2/5" id="cv" client:load/>
 	</div>
 </Layout>
