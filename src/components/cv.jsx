@@ -1,14 +1,15 @@
-import CVMinimal from "../components/cvs/CVMinimal";
 import React, { useState, useEffect } from "react";
-
+import CVMinimal from "./cvs/CVMinimal.jsx";
 export default function CV(props) {
-	const [userData, setUserData] = useState(null);
+	const [userData, setUserData] = useState(props.info);
 
+	// load user data from localStorage
 	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem("userData")) || props.info;
-		setUserData(data);
-	}, []); // [] forces useEffect to only execute once on loading
-	
+		const data = JSON.parse(localStorage.getItem("userData"));
+		if (data) {
+			setUserData(data);
+		}
+	},[]); // [] forces useEffect to only run once when the page loads.
 
 	// The SVG element lets us scale the CV content with the container
 

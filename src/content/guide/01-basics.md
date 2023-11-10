@@ -8,7 +8,7 @@ Un CV est un document qui résume vos compétences, votre expérience et vos ré
 
 ## Que doit contenir un CV?
 
-Un CV à la base doit contenir les informations suivantes:
+Géneralement un CV doit contenir les informations suivantes:
 
 -   ### Informations personnelles
     -   Nom et prénom
