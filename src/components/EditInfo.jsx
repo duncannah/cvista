@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
 
 
 const EditInfo = (props) => {
-	const [userData, setUserData] = useState({"name": "", "title": "", "email": "", "phone": "", "experience": [], "skills": ["jeej"]});
-	const [experience, setExperience] = useState({});
+	const [userData, setUserData] = useState({"name": "", "title": "", "phone": "", "email": "", "experience": [], "skills": []});
+	const [experience, setExperience] = useState({"company": "", "role": "", "startDate": "", "endDate": "", "description": ""});
 	const [skill, setSkill] = useState("");
-	
-	// load values from localStorage
+
+	// load user data from localStorage
 	useEffect(() => {
-		if (localStorage.getItem("userData")) {
-			setUserData(JSON.parse(localStorage.getItem("userData")));
-		}
-	}, []); // [] forces useEffect to only run once.
+		setUserData(JSON.parse(localStorage.getItem("userData")) || props.info);
+	},[]); // [] forces useEffect to only run once when the page loads.
+	
 
 	// update localStorage when userData is updated. Sort of.
 	useEffect(() => {
-		if (userData !== null) {
+		if (userData.name !== "" && userData.title !== "" && userData.email !== "" && userData.phone !== "") {
 			localStorage.setItem("userData", JSON.stringify(userData));
 		}
 	});
@@ -180,7 +178,7 @@ const EditInfo = (props) => {
 							</tr>
 						))}
 						<tr>
-							<td><input type="text" onChange={updateSkill} value={skill} onChange={() => {}} placeholder="capacité"
+							<td><input type="text" onChange={updateSkill} value={skill} placeholder="capacité"
 								className="justify-center p-1 m-2 border-solid border-2 rounded-full transition ease-in-out duration-300 hover:bg-gray-100"
 							/></td>
 							<td><button onClick={submitSkill} 
