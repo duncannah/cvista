@@ -5,16 +5,18 @@ const EditInfo = (props) => {
 	const [userData, setUserData] = useState({"name": "", "title": "", "phone": "", "email": "", "experience": [], "skills": []});
 	const [experience, setExperience] = useState({"company": "", "role": "", "startDate": "", "endDate": "", "description": ""});
 	const [skill, setSkill] = useState("");
-
 	// load user data from localStorage
 	useEffect(() => {
-		setUserData(JSON.parse(localStorage.getItem("userData")) || props.info);
+		const data = JSON.parse(localStorage.getItem("userData"));
+		if (data != null && data != undefined) {
+			setUserData(data);
+		}
 	},[]); // [] forces useEffect to only run once when the page loads.
-	
+
 
 	// update localStorage when userData is updated. Sort of.
 	useEffect(() => {
-		if (userData.name !== "" && userData.title !== "" && userData.email !== "" && userData.phone !== "") {
+		if (userData.name !== "" || userData.title !== "" || userData.email !== "" || userData.phone !== "") {
 			localStorage.setItem("userData", JSON.stringify(userData));
 		}
 	});
