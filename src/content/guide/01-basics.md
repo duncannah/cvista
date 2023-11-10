@@ -18,11 +18,11 @@ Géneralement un CV doit contenir les informations suivantes:
     -   Nom de l'entreprise
     -   Durée de l'emploi
     -   Description des tâches et exploits
--   ### Formation
+-   ### [Formation](formation)
     -   Diplôme
     -   Nom de l'établissement
     -   Durée de la formation
--   ### Compétences
+-   ### [Compétences](skills)
     -   Compétences techniques
     -   Compétences linguistiques
     -   Compétences informatiques
