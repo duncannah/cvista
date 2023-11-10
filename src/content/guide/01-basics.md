@@ -8,16 +8,37 @@ Un CV est un document qui résume vos compétences, votre expérience et vos ré
 
 ## Que doit contenir un CV?
 
-Un CV à la base doit contenir les informations suivantes:
+Géneralement un CV doit contenir les informations suivantes:
 
--   Informations personnelles
-    -   Nom et prénom
-    -   Informations de contact (adresse, numéro de téléphone, adresse e-mail)
--   Expérience professionnelle
-    -   Poste occupé
-    -   Nom de l'entreprise
-    -   Durée de l'emploi
-    -   Description des tâches
+### 1. Informations personnelles
+
+- **Nom et prénom:** Placez-les en haut du CV avec une taille de police distincte.
+  - Ces informations identifient clairement le candidat, facilitant la reconnaissance et la différenciation par les employeurs.
+
+- **Informations de contact:**
+  - **Adresse :**
+    - Importante pour des postes locaux ou nécessitant une proximité physique.
+  - **Numéro de téléphone :**
+    - Moyen direct pour les employeurs de vous contacter. Assurez-vous qu'il est correct et que vous êtes joignable.
+  - **Adresse e-mail :**
+    - Méthode de communication électronique courante. Utilisez une adresse professionnelle et vérifiez-la régulièrement.
+
+### 2. Expérience professionnelle
+
+Pour chaque poste occupé, incluez :
+
+- **Poste occupé**
+  - Indique le titre du poste occupé, permettant une compréhension rapide de votre niveau d'expérience et de vos compétences.
+
+- **Nom de l'entreprise**
+  - Identifie l'employeur, donnant de la crédibilité à votre expérience et permettant de contextualiser votre parcours.
+
+- **Durée de l'emploi (format "Mois Année - Mois Année")**
+  - Fournit une indication claire de la durée de l'emploi, permettant de comprendre la stabilité de votre parcours professionnel.
+
+- **Description des tâches**
+  - Détaille les responsabilités et réalisations spécifiques liées au poste, offrant une compréhension approfondie de vos compétences et de votre contribution.
+
 -   Formation
     -   Diplôme
     -   Nom de l'établissement
