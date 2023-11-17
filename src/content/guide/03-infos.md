@@ -29,8 +29,6 @@ Exemple :
 - Si vous incluez une photo, assurez-vous qu'elle est de haute qualité et professionnelle. Évitez les selfies ou les photos de vacances.
 - La photo doit montrer votre visage clairement, avec un arrière-plan sobre.
 
-Exemple :  
-![Photo Professionnelle](lien_vers_votre_photo)
 
 ## Consistance en ligne :
 
