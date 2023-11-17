@@ -1,5 +1,5 @@
 ---
-title: "Conseils pour les Expériences Professionnelles"
+title: "Présentation des Expériences Professionnelles"
 ---
 
 Présenter vos expériences professionnelles de manière claire et impactante est crucial pour attirer l'attention des recruteurs. Voici comment organiser cette section :
