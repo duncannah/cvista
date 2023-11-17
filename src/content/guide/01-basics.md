@@ -10,10 +10,10 @@ Un CV est un document qui résume vos compétences, votre expérience et vos ré
 
 Géneralement un CV doit contenir les informations suivantes:
 
--   ### Informations personnelles
+-   ### [Informations personnelles](infos)
     -   Nom et prénom
     -   Informations de contact (adresse, numéro de téléphone, adresse e-mail)
--   ### Expérience professionnelle
+-   ### [Expérience professionnelle](experiences)
     -   Poste occupé
     -   Nom de l'entreprise
     -   Durée de l'emploi
