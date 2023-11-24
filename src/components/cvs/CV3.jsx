@@ -59,7 +59,7 @@ export default function CV3({info}) {
 								{experience.role}, {experience.company}
 							</h4>
 							<p className="text-sm">
-								{experience.startDate} {" – "}{" "}
+								{experience.startDate} {" – "}
 								{experience.endDate}
 							</p>
 						</div>
@@ -76,7 +76,7 @@ export default function CV3({info}) {
 								{education.degree}, {education.school}
 							</h4>
 							<p className="text-sm">
-								{education.startDate} {" – "}{" "}
+								{education.startDate} {" – "}
 								{education.endDate}
 							</p>
 						</div>

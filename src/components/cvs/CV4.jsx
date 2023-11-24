@@ -75,7 +75,7 @@ export default function CV4({info}) {
 								</h5>
 							</div>
 							<p className="text-sm">
-								{experience.startDate} {" – "}{" "}
+								{experience.startDate} {" – "}
 								{experience.endDate}
 							</p>
 						</div>
@@ -97,7 +97,7 @@ export default function CV4({info}) {
 								</h5>
 							</div>
 							<p className="text-sm">
-								{education.startDate} {" – "}{" "}
+								{education.startDate} {" – "}
 								{education.endDate}
 							</p>
 						</div>

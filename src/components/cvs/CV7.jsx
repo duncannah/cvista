@@ -92,7 +92,7 @@ export default function CV7({info}) {
 									{education.degree}, {education.school}
 								</h4>
 								<p className="text-sm opacity-50">
-									{education.startDate} {" – "}{" "}
+									{education.startDate} {" – "}
 									{education.endDate}
 								</p>
 							</div>

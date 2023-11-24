@@ -78,7 +78,7 @@ export default function CV5({info}) {
 								{education.degree} {" – "} {education.school}
 							</h4>
 							<p className="text-sm uppercase">
-								{education.startDate} {" – "}{" "}
+								{education.startDate} {" – "}
 								{education.endDate}
 							</p>
 						</div>
