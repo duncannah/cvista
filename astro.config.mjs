@@ -7,7 +7,7 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
 	integrations: [react(), tailwind({applyBaseStyles: false})],
 	redirects: {
-		"/guide": "/guide/start",
+		"/guide": "./guide/start",
 	},
 	base: "/cvista",
 });

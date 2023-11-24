@@ -30,5 +30,24 @@ import {ViewTransitions} from "astro:transitions";
 		<main class="flex grow flex-col [&>*]:w-full">
 			<slot />
 		</main>
+		<footer class="bg-gray-3">
+			<div
+				class="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-12 sm:grid-cols-2"
+			>
+				<div class="flex flex-col gap-2">
+					<div class="text-2xl font-bold">CVista</div>
+					<div class="text-sm opacity-60">
+						&copy; {new Date().getFullYear()} CVista. Tous droits
+						réservés.
+					</div>
+				</div>
+				<div class="flex flex-col items-end gap-2">
+					<a href="./guide" class="link">À propos</a>
+					<a href="./privacy" class="link"
+						>Politique de confidentialité</a
+					>
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>

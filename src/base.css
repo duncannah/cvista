@@ -8,6 +8,44 @@
 	}
 }
 
+@layer utilities {
+	/* Inter font metrics */
+	.text-xs {
+		letter-spacing: 0em;
+	}
+	.text-sm {
+		letter-spacing: -0.006em;
+	}
+	.text-base,
+	body,
+	.prose {
+		letter-spacing: -0.011em;
+	}
+	.text-lg {
+		letter-spacing: -0.014em;
+	}
+	.text-xl {
+		letter-spacing: -0.017em;
+	}
+	.text-2xl {
+		letter-spacing: -0.019em;
+	}
+	.text-3xl {
+		letter-spacing: -0.021em;
+	}
+	.text-4xl,
+	.text-5xl,
+	.text-6xl,
+	.text-7xl,
+	.text-8xl,
+	.text-9xl,
+	.prose h1,
+	.prose h2,
+	.prose h3 {
+		letter-spacing: -0.022em;
+	}
+}
+
 :root {
 	font-feature-settings:
 		"liga" 1,
