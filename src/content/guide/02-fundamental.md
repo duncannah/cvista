@@ -1,6 +1,7 @@
 ---
 title: "Les éléments essentiels dans un CV"
 ---
+
 ## Titre du CV
 
 Le titre de votre CV est essentiel pour indiquer votre projet professionnel et votre niveau de responsabilités. Il permet au recruteur de comprendre en un coup d'œil si votre profil correspond à ses besoins. Évitez les titres génériques et préférez des titres spécifiques à l'annonce. Personnalisez votre titre en reprenant celui de l'offre d'emploi et ajoutez quelques qualités distinctives.
@@ -31,4 +32,4 @@ La relecture est cruciale. Un CV sans fautes d'orthographe témoigne de votre ri
 
 En suivant ces conseils, vous serez en mesure de créer un CV impeccable qui attirera l'attention des recruteurs. N'oubliez pas de personnaliser chaque CV en fonction de l'offre d'emploi pour maximiser vos chances de réussite. Bonne rédaction !
 
-N'attendez plus, commencez à rédiger votre CV dès maintenant en [cliquant ici](/create-cv)
+N'attendez plus, commencez à rédiger votre CV dès maintenant en [cliquant ici](./create-cv)

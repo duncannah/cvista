@@ -9,4 +9,5 @@ export default defineConfig({
 	redirects: {
 		"/guide": "/guide/start",
 	},
+	base: "/cvista",
 });

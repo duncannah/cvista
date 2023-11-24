@@ -31,7 +31,7 @@ const {Content} = await entry.render();
 								paths.map((page) => (
 									<li>
 										<a
-											href={`/guide/${page.params.slug}`}
+											href={`./guide/${page.params.slug}`}
 											class={`menu-item ${
 												page.params.slug ===
 												entry.slug.substring(3)
