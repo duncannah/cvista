@@ -3,53 +3,74 @@ import Layout from "../layouts/Layout.astro";
 
 import CV from "../components/cv";
 import EditInfo from "../components/EditInfo.jsx";
-import {ProviderWrapper as UserDataProviderWrapper} from "../components/UserDataContext.jsx";
 
 const cvInfo = {
+	template: "minimal",
+
 	name: "John Doe",
-	title: "Software Engineer",
+	title: "Développeur Web",
+	address: "Av. Emile Vandervelde 80, 1200 Woluwe-Saint-Lambert",
 	email: "john@doe.com",
-	phone: "+1 234 567 890",
+	phone: "+32 123 45 67 89",
+
+	photo: "https://i.pravatar.cc/300",
+
+	statement:
+		"Diplômé récemment en informatique, je suis un développeur junior passionné par la création de solutions innovantes. Fort d'une formation solide en programmation et d'une expérience pratique acquise au cours de mes études, je suis désireux de mettre en œuvre mes compétences techniques fraîchement acquises dans un environnement professionnel.",
 
 	experience: [
 		{
-			company: "Company 1",
-			role: "Software Engineer",
-			startDate: "2019-01-01",
-			endDate: "2020-01-01",
+			company: "Firme 1",
+			role: "Développeur Web",
+			startDate: "Juin 2024",
+			endDate: "Présent",
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nunc.",
+				"En tant que développeur au sein de ce firme, j'ai collaboré avec une équipe talentueuse pour concevoir et développer des solutions logicielles innovantes.",
 		},
 		{
-			company: "Company 2",
-			role: "Software Engineer",
-			startDate: "2018-01-01",
-			endDate: "2019-01-01",
+			company: "Firme 2",
+			role: "Job étudiant",
+			startDate: "Juin 2022",
+			endDate: "Août 2022",
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nunc.",
+				"Pendant mes études, j'ai travaillé comme jobiste dans cette firme. J'ai pu y développer mes compétences en communication et en travail d'équipe, ainsi qu'en gestion de projet.",
 		},
-		{
-			company: "Company 3",
-			role: "Software Engineer",
-			startDate: "2017-01-01",
-			endDate: "2018-01-01",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nunc.",
-		},
-		],
-	skills: [
-		"skill 1",
-		"skill 2",
-		"skill 3",
-		"skill 4",
 	],
+
+	education: [
+		{
+			degree: "Bachelier en Informatique",
+			school: "HE Léonard de Vinci",
+			startDate: "Septembre 2021",
+			endDate: "Juin 2024",
+			description:
+				"J'ai suivi un bachelier en informatique à la Haute École Léonard de Vinci. J'y ai appris les bases de la programmation, ainsi que les principes de l'ingénierie logicielle.",
+		},
+	],
+
+	languages: [
+		{
+			language: "Français",
+			level: "Langue maternelle",
+		},
+		{
+			language: "Anglais",
+			level: "Courant",
+		},
+		{
+			language: "Néerlandais",
+			level: "Notions",
+		},
+	],
+
+	skills: ["skill 1", "skill 2", "skill 3", "skill 4"],
 };
 ---
 
 <Layout>
 	<div class="content flex flex-row">
-		<EditInfo class="w-1/2" width="half" info={cvInfo} client:load/>
-		<CV template="minimal" info={cvInfo} className="w-2/5" id="cv" client:load/>
+		<EditInfo class="w-1/2" width="half" info={cvInfo} client:load />
+		<CV info={cvInfo} className="w-2/5" id="cv" client:load />
 	</div>
 </Layout>
 
@@ -66,16 +87,23 @@ const cvInfo = {
 		}
 
 		/* Hide everything except the CV */
-		body > * {
+		body > *,
+		astro-island {
 			display: none !important;
 		}
 
-		/* Can't use :has (thanks Firefox) */
-		/* *:has(#cv), */
-		body > main,
-		body > main > div,
-		#cv {
-			display: block !important;
+		@supports selector(:has(+ *)) {
+			*:has(#cv) {
+				display: block !important;
+			}
+		}
+
+		@supports not selector(:has(+ *)) {
+			body > main,
+			body > main > div,
+			#cv {
+				display: block !important;
+			}
 		}
 
 		#cv {

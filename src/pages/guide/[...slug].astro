@@ -18,7 +18,7 @@ const {Content} = await entry.render();
 ---
 
 <Layout>
-	<div class="content flex flex-grow px-0">
+	<div class="content flex grow px-0">
 		<div class="sidebar h-auto justify-start rounded-xl">
 			<div class="sidebar-title p-4">Guide de rédaction de CV</div>
 
@@ -49,7 +49,7 @@ const {Content} = await entry.render();
 				</div>
 			</div>
 		</div>
-		<div class="content prose prose-neutral dark:prose-invert flex-grow">
+		<div class="content prose prose-neutral dark:prose-invert grow">
 			<h1>{entry.data.title}</h1>
 			<Content />
 		</div>

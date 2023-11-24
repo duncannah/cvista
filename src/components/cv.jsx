@@ -1,15 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
+
 import CVMinimal from "./cvs/CVMinimal.jsx";
+import CV2 from "./cvs/CV2.jsx";
+import CV3 from "./cvs/CV3.jsx";
+import CV4 from "./cvs/CV4.jsx";
+import CV5 from "./cvs/CV5.jsx";
+import CV6 from "./cvs/CV6.jsx";
+import CV7 from "./cvs/CV7.jsx";
+
+import usePrintTitle from "../hooks/usePrintTitle.js";
+
+export const CVs = {
+	minimal: CVMinimal,
+	2: CV2,
+	3: CV3,
+	4: CV4,
+	5: CV5,
+	6: CV6,
+	7: CV7,
+};
+
 export default function CV(props) {
 	const [userData, setUserData] = useState(props.info);
 
-	// load user data from localStorage
-	useEffect(() => {
+	const loadSavedData = () => {
 		const data = JSON.parse(localStorage.getItem("userData"));
 		if (data) {
 			setUserData(data);
 		}
-	},[]); // [] forces useEffect to only run once when the page loads.
+	};
+
+	useEffect(() => {
+		loadSavedData();
+
+		setInterval(loadSavedData, 2000);
+	}, []);
+
+	usePrintTitle(userData?.name ? `${userData.name} - Curriculum Vitae` : "");
 
 	// The SVG element lets us scale the CV content with the container
 
@@ -34,14 +61,17 @@ export default function CV(props) {
 					height="100%"
 					xmlns="http://www.w3.org/1999/xhtml"
 				>
-					{ userData !== null ? 
-						( props.template === "minimal" ? 
-							( <CVMinimal info={userData} /> ) : 
-							( <>Unknown template: {props.template}</> ) ) :
-						( <h5>loading data</h5> )
-						// This is aweful.
-					}
-					
+					{userData !== null ? (
+						CVs[userData.template] ? (
+							React.createElement(CVs[userData.template], {
+								info: userData,
+							})
+						) : (
+							<CVMinimal info={userData} />
+						)
+					) : (
+						<h5>Chargement...</h5>
+					)}
 				</foreignObject>
 			</svg>
 		</div>
