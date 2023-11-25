@@ -1,4 +1,4 @@
-import {filterHTML} from "../CV.jsx";
+import {filterHTML} from "../cv.jsx";
 
 /**
  * A minimal CV template

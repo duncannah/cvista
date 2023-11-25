@@ -1,5 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
-import {filterHTML} from "../CV.jsx";
+import {filterHTML} from "../cv.jsx";
 
 export default function CV4({info}) {
 	useGoogleFont("IBM Plex Sans", "400;500;700");

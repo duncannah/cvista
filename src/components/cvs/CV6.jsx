@@ -1,5 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
-import {filterHTML} from "../CV.jsx";
+import {filterHTML} from "../cv.jsx";
 
 function Section({title, children}) {
 	return (

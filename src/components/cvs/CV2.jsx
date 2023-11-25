@@ -1,5 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
-import {filterHTML} from "../CV.jsx";
+import {filterHTML} from "../cv.jsx";
 
 export default function CV2({info}) {
 	useGoogleFont("Lato", "400;500;700");
