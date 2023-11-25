@@ -123,6 +123,7 @@ const cvPlaceholder = {
 
 		/* Hide everything except the CV */
 		body > *,
+		main > * > *,
 		astro-island {
 			display: none !important;
 		}
@@ -136,6 +137,8 @@ const cvPlaceholder = {
 		@supports not selector(:has(+ *)) {
 			body > main,
 			body > main > div,
+			body > main > div > div:last-child,
+			body > main > div > div:last-child astro-island:last-child,
 			#cv {
 				display: block !important;
 			}
