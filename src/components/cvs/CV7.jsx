@@ -68,64 +68,76 @@ export default function CV7({info}) {
 					</Section>
 				)}
 
-				<Section title="Expérience">
-					{info.experience.map((experience) => (
-						<div className="flex grow flex-col gap-1">
-							<div className="flex grow justify-between">
-								<h4 className="font-bold">
-									{experience.role}, {experience.company}
-								</h4>
-								<p className="text-sm opacity-50">
-									{experience.startDate} {" – "}
-									{experience.endDate}
+				{info.experience.length > 0 && (
+					<Section title="Expérience">
+						{info.experience.map((experience) => (
+							<div className="flex grow flex-col gap-1">
+								<div className="flex grow justify-between">
+									<h4 className="font-bold">
+										{experience.role}, {experience.company}
+									</h4>
+									<p className="text-sm opacity-50">
+										{experience.startDate} {" – "}
+										{experience.endDate}
+									</p>
+								</div>
+								<p className="text-sm">
+									{experience.description}
 								</p>
-							</div>
-							<p className="text-sm">{experience.description}</p>
-						</div>
-					))}
-				</Section>
-
-				<Section title="Formation">
-					{info.education.map((education) => (
-						<div className="flex grow flex-col gap-1">
-							<div className="flex grow justify-between">
-								<h4 className="font-bold">
-									{education.degree}, {education.school}
-								</h4>
-								<p className="text-sm opacity-50">
-									{education.startDate} {" – "}
-									{education.endDate}
-								</p>
-							</div>
-							<p className="text-sm">{education.description}</p>
-						</div>
-					))}
-				</Section>
-
-				<Section title="Langues">
-					<div className="grid grid-cols-2 gap-4">
-						{info.languages.map((language) => (
-							<div className="flex items-center justify-between gap-4">
-								<h4 className="text-medium font-bold">
-									{language.language}
-								</h4>
-								<div className="h-px grow rounded-full bg-gray-300"></div>
-								<h5 className="font-medium">
-									{language.level}
-								</h5>
 							</div>
 						))}
-					</div>
-				</Section>
+					</Section>
+				)}
 
-				<Section title="Compétences">
-					<div
-						className="prose prose-sm"
-						dangerouslySetInnerHTML={{
-							__html: filterHTML(info.skills),
-						}}
-					/>
-				</Section>
+				{info.education.length > 0 && (
+					<Section title="Formation">
+						{info.education.map((education) => (
+							<div className="flex grow flex-col gap-1">
+								<div className="flex grow justify-between">
+									<h4 className="font-bold">
+										{education.degree}, {education.school}
+									</h4>
+									<p className="text-sm opacity-50">
+										{education.startDate} {" – "}
+										{education.endDate}
+									</p>
+								</div>
+								<p className="text-sm">
+									{education.description}
+								</p>
+							</div>
+						))}
+					</Section>
+				)}
+
+				{info.languages.length > 0 && (
+					<Section title="Langues">
+						<div className="grid grid-cols-2 gap-4">
+							{info.languages.map((language) => (
+								<div className="flex items-center justify-between gap-4">
+									<h4 className="text-medium font-bold">
+										{language.language}
+									</h4>
+									<div className="h-px grow rounded-full bg-gray-300"></div>
+									<h5 className="font-medium">
+										{language.level}
+									</h5>
+								</div>
+							))}
+						</div>
+					</Section>
+				)}
+
+				{info.skills.length > 0 && (
+					<Section title="Compétences">
+						<div
+							className="prose prose-sm"
+							dangerouslySetInnerHTML={{
+								__html: filterHTML(info.skills),
+							}}
+						/>
+					</Section>
+				)}
 			</div>
 		</div>
 	);

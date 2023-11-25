@@ -47,52 +47,60 @@ export default function CV6({info}) {
 			</div>
 			<div className="flex gap-4">
 				<div className="flex flex-col gap-4">
-					<Section title="Expérience">
-						{info.experience.map((experience) => (
-							<div>
-								<div className="mb-1 flex flex-col">
-									<h4 className="font-bold">
-										{experience.role}, {experience.company}
-									</h4>
-									<p className="text-sm uppercase opacity-60">
-										{experience.startDate} {" – "}
-										{experience.endDate}
+					{info.experience.length > 0 && (
+						<Section title="Expérience">
+							{info.experience.map((experience) => (
+								<div>
+									<div className="mb-1 flex flex-col">
+										<h4 className="font-bold">
+											{experience.role},{" "}
+											{experience.company}
+										</h4>
+										<p className="text-sm uppercase opacity-60">
+											{experience.startDate} {" – "}
+											{experience.endDate}
+										</p>
+									</div>
+									<p className="text-sm">
+										{experience.description}
 									</p>
 								</div>
-								<p className="text-sm">
-									{experience.description}
-								</p>
-							</div>
-						))}
-					</Section>
+							))}
+						</Section>
+					)}
 
-					<Section title="Formation">
-						{info.education.map((education) => (
-							<div>
-								<div className="mb-1 flex flex-col">
-									<h4 className="font-bold">
-										{education.degree}, {education.school}
-									</h4>
-									<p className="text-sm uppercase opacity-60">
-										{education.startDate} {" – "}
-										{education.endDate}
+					{info.education.length > 0 && (
+						<Section title="Formation">
+							{info.education.map((education) => (
+								<div>
+									<div className="mb-1 flex flex-col">
+										<h4 className="font-bold">
+											{education.degree},{" "}
+											{education.school}
+										</h4>
+										<p className="text-sm uppercase opacity-60">
+											{education.startDate} {" – "}
+											{education.endDate}
+										</p>
+									</div>
+									<p className="text-sm">
+										{education.description}
 									</p>
 								</div>
-								<p className="text-sm">
-									{education.description}
-								</p>
-							</div>
-						))}
-					</Section>
+							))}
+						</Section>
+					)}
 
-					<Section title="Compétences">
-						<div
-							className="prose prose-sm"
-							dangerouslySetInnerHTML={{
-								__html: filterHTML(info.skills),
-							}}
-						/>
-					</Section>
+					{info.skills.length > 0 && (
+						<Section title="Compétences">
+							<div
+								className="prose prose-sm"
+								dangerouslySetInnerHTML={{
+									__html: filterHTML(info.skills),
+								}}
+							/>
+						</Section>
+					)}
 				</div>
 				<div className="flex w-56 shrink-0 flex-col gap-4">
 					<Section title="Contact">
@@ -112,16 +120,20 @@ export default function CV6({info}) {
 						</div>
 					</Section>
 
-					<Section title="Langues">
-						{info.languages.map((language) => (
-							<div className="flex justify-between gap-4">
-								<h4 className="font-medium">
-									{language.language}
-								</h4>
-								<h5 className="text-right">{language.level}</h5>
-							</div>
-						))}
-					</Section>
+					{info.languages.length > 0 && (
+						<Section title="Langues">
+							{info.languages.map((language) => (
+								<div className="flex justify-between gap-4">
+									<h4 className="font-medium">
+										{language.language}
+									</h4>
+									<h5 className="text-right">
+										{language.level}
+									</h5>
+								</div>
+							))}
+						</Section>
+					)}
 				</div>
 			</div>
 			<svg

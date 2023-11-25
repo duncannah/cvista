@@ -57,62 +57,79 @@ export default function CV4({info}) {
 			</div>
 
 			<div className="flex flex-col gap-4 px-8 py-16 [&>h3:before]:w-2 [&>h3:before]:bg-emerald-900 [&>h3:before]:content-[''] [&>h3]:flex [&>h3]:gap-2">
-				<h3 className="text-3xl font-bold">Profil</h3>
-
 				{info.statement && (
-					<div className=" text-lg">{info.statement}</div>
+					<>
+						<h3 className="text-3xl font-bold">Profil</h3>
+						<div className="text-lg">{info.statement}</div>
+					</>
 				)}
 
-				<h3 className="text-3xl font-bold">Expérience</h3>
-				{info.experience.map((experience) => (
-					<div>
-						<div className="flex items-end justify-between">
+				{info.experience.length > 0 && (
+					<>
+						<h3 className="text-3xl font-bold">Expérience</h3>
+						{info.experience.map((experience) => (
 							<div>
-								<h4 className="text-lg font-bold">
-									{experience.company}
-								</h4>
-								<h5 className="font-medium">
-									{experience.role}
-								</h5>
+								<div className="flex items-end justify-between">
+									<div>
+										<h4 className="text-lg font-bold">
+											{experience.company}
+										</h4>
+										<h5 className="font-medium">
+											{experience.role}
+										</h5>
+									</div>
+									<p className="text-sm">
+										{experience.startDate} {" – "}
+										{experience.endDate}
+									</p>
+								</div>
+								<p className="text-sm">
+									{experience.description}
+								</p>
 							</div>
-							<p className="text-sm">
-								{experience.startDate} {" – "}
-								{experience.endDate}
-							</p>
-						</div>
-						<p className="text-sm">{experience.description}</p>
-					</div>
-				))}
+						))}
+					</>
+				)}
 
-				<h3 className="text-3xl font-bold">Formation</h3>
+				{info.education.length > 0 && (
+					<>
+						<h3 className="text-3xl font-bold">Formation</h3>
 
-				{info.education.map((education) => (
-					<div>
-						<div className="flex items-end justify-between">
+						{info.education.map((education) => (
 							<div>
-								<h4 className="text-lg font-bold">
-									{education.degree}
-								</h4>
-								<h5 className="font-medium">
-									{education.school}
-								</h5>
+								<div className="flex items-end justify-between">
+									<div>
+										<h4 className="text-lg font-bold">
+											{education.degree}
+										</h4>
+										<h5 className="font-medium">
+											{education.school}
+										</h5>
+									</div>
+									<p className="text-sm">
+										{education.startDate} {" – "}
+										{education.endDate}
+									</p>
+								</div>
+								<p className="text-sm">
+									{education.description}
+								</p>
 							</div>
-							<p className="text-sm">
-								{education.startDate} {" – "}
-								{education.endDate}
-							</p>
-						</div>
-						<p className="text-sm">{education.description}</p>
-					</div>
-				))}
+						))}
+					</>
+				)}
 
-				<h3 className="text-3xl font-bold">Compétences</h3>
-				<div
-					className="prose prose-sm"
-					dangerouslySetInnerHTML={{
-						__html: filterHTML(info.skills),
-					}}
-				/>
+				{info.skills.length > 0 && (
+					<>
+						<h3 className="text-3xl font-bold">Compétences</h3>
+						<div
+							className="prose prose-sm"
+							dangerouslySetInnerHTML={{
+								__html: filterHTML(info.skills),
+							}}
+						/>
+					</>
+				)}
 			</div>
 		</div>
 	);

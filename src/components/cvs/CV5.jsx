@@ -54,60 +54,83 @@ export default function CV5({info}) {
 					<div className="text-justify text-lg">{info.statement}</div>
 				)}
 
-				<h3 className="text-2xl font-bold">Expérience</h3>
-				{info.experience.map((experience) => (
-					<div>
-						<div className="mb-1 flex flex-col gap-1">
-							<h4 className="font-bold">
-								{experience.role}, {experience.company}
-							</h4>
-							<p className="text-sm uppercase">
-								{experience.startDate} {" – "}{" "}
-								{experience.endDate}
-							</p>
+				{info.experience.length > 0 && (
+					<>
+						<h3 className="text-2xl font-bold">Expérience</h3>
+						{info.experience.map((experience) => (
+							<div>
+								<div className="mb-1 flex flex-col gap-1">
+									<h4 className="font-bold">
+										{experience.role}, {experience.company}
+									</h4>
+									<p className="text-sm uppercase">
+										{experience.startDate} {" – "}{" "}
+										{experience.endDate}
+									</p>
+								</div>
+								<p className="text-sm">
+									{experience.description}
+								</p>
+							</div>
+						))}
+					</>
+				)}
+
+				{info.education.length > 0 && (
+					<>
+						<h3 className="text-2xl font-bold">Formation</h3>
+
+						{info.education.map((education) => (
+							<div>
+								<div className="mb-1 flex flex-col gap-1">
+									<h4 className="font-bold">
+										{education.degree} {" – "}{" "}
+										{education.school}
+									</h4>
+									<p className="text-sm uppercase">
+										{education.startDate} {" – "}
+										{education.endDate}
+									</p>
+								</div>
+								<p className="text-sm">
+									{education.description}
+								</p>
+							</div>
+						))}
+					</>
+				)}
+
+				{info.languages.length > 0 && (
+					<>
+						<h3 className="text-2xl font-bold">Langues</h3>
+
+						<div className="grid w-full grid-cols-2 gap-4">
+							{info.languages.map((language) => (
+								<div className="flex items-center justify-between gap-4">
+									<h4 className="text-medium font-bold">
+										{language.language}
+									</h4>
+									<div className="h-px grow rounded-full bg-current"></div>
+									<h5 className="font-medium">
+										{language.level}
+									</h5>
+								</div>
+							))}
 						</div>
-						<p className="text-sm">{experience.description}</p>
-					</div>
-				))}
+					</>
+				)}
 
-				<h3 className="text-2xl font-bold">Formation</h3>
-
-				{info.education.map((education) => (
-					<div>
-						<div className="mb-1 flex flex-col gap-1">
-							<h4 className="font-bold">
-								{education.degree} {" – "} {education.school}
-							</h4>
-							<p className="text-sm uppercase">
-								{education.startDate} {" – "}
-								{education.endDate}
-							</p>
-						</div>
-						<p className="text-sm">{education.description}</p>
-					</div>
-				))}
-
-				<h3 className="text-2xl font-bold">Langues</h3>
-
-				<div className="grid w-full grid-cols-2 gap-4">
-					{info.languages.map((language) => (
-						<div className="flex items-center justify-between gap-4">
-							<h4 className="text-medium font-bold">
-								{language.language}
-							</h4>
-							<div className="h-px grow rounded-full bg-current"></div>
-							<h5 className="font-medium">{language.level}</h5>
-						</div>
-					))}
-				</div>
-
-				<h3 className="text-2xl font-bold">Compétences</h3>
-				<div
-					className="prose prose-sm"
-					dangerouslySetInnerHTML={{
-						__html: filterHTML(info.skills),
-					}}
-				/>
+				{info.skills.length > 0 && (
+					<>
+						<h3 className="text-2xl font-bold">Compétences</h3>
+						<div
+							className="prose prose-sm"
+							dangerouslySetInnerHTML={{
+								__html: filterHTML(info.skills),
+							}}
+						/>
+					</>
+				)}
 			</div>
 		</div>
 	);
