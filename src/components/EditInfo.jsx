@@ -59,18 +59,33 @@ const MultipleItemSection = ({
 						</button>
 					</div>
 					<div className="form-group grid grid-cols-1 gap-4 sm:grid-cols-2">
-						{inputs.map(([key, label]) => (
-							<div className="form-field grow" key={key}>
+						{inputs.map(([key, label, type = "text"]) => (
+							<div
+								className={`form-field ${
+									type == "textarea" ? "col-span-2" : ""
+								}`}
+								key={key}
+							>
 								<label className="form-label">{label}</label>
 
-								<input
-									placeholder={placeholder[key]}
-									value={item[key] || ""}
-									name={key}
-									onChange={_handleChange(index)}
-									type="text"
-									className="input"
-								/>
+								{type == "textarea" ? (
+									<textarea
+										className="textarea textarea-block"
+										placeholder={placeholder[key]}
+										value={item[key] || ""}
+										name={key}
+										onChange={_handleChange(index)}
+									/>
+								) : (
+									<input
+										placeholder={placeholder[key]}
+										value={item[key] || ""}
+										name={key}
+										onChange={_handleChange(index)}
+										type={type}
+										className="input"
+									/>
+								)}
 							</div>
 						))}
 					</div>
@@ -238,6 +253,7 @@ export default function EditInfo({placeholder}) {
 							["company", "Entreprise"],
 							["startDate", "Date de début"],
 							["endDate", "Date de fin"],
+							["description", "Description", "textarea"],
 						],
 					}}
 				/>
@@ -253,6 +269,7 @@ export default function EditInfo({placeholder}) {
 							["school", "École"],
 							["startDate", "Date de début"],
 							["endDate", "Date de fin"],
+							["description", "Description", "textarea"],
 						],
 					}}
 				/>
