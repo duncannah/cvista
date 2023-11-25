@@ -21,7 +21,7 @@ export default function CV7({info}) {
 			<div className="flex min-h-full flex-col gap-12 border border-white p-6">
 				<div className="flex justify-between gap-8">
 					<h2>{info.title || "..."}</h2>
-					<div>
+					<div className="text-right">
 						{info.address && <div>{info.address}</div>}
 						<div className="flex flex-wrap justify-end gap-4">
 							{info.phone && (
@@ -59,10 +59,7 @@ export default function CV7({info}) {
 				</div>
 				{info.statement && (
 					<Section title="Profil">
-						<p
-							className="font-['Playfair_Display'] text-lg
-"
-						>
+						<p className="font-['Playfair_Display'] text-lg">
 							{info.statement}
 						</p>
 					</Section>
