@@ -86,17 +86,27 @@ export default function EditInfo({placeholder}) {
 
 	useEffect(() => {
 		const data = JSON.parse(localStorage.getItem("userData"));
-		if (data != null && data != undefined) setUserData(data);
+		if (data != null && data != undefined) {
+			delete data.template;
+			setUserData(data);
+		}
 
 		setDataLoaded(true);
 	}, []);
 
 	useEffect(() => {
-		if (dataLoaded)
-			localStorage.setItem("userData", JSON.stringify(userData));
+		if (dataLoaded) {
+			const data = JSON.parse(localStorage.getItem("userData"));
 
-		console.log(userData);
-	}, [userData]);
+			localStorage.setItem(
+				"userData",
+				JSON.stringify({
+					...data,
+					...userData,
+				}),
+			);
+		}
+	}, [userData, dataLoaded]);
 
 	const _handleChange = (e) => {
 		setUserData((userData) => ({

@@ -124,7 +124,7 @@ export default function CV5({info}) {
 					<>
 						<h3 className="text-2xl font-bold">Compétences</h3>
 						<div
-							className="prose prose-sm"
+							className="prose prose-sm text-current"
 							dangerouslySetInnerHTML={{
 								__html: filterHTML(info.skills),
 							}}

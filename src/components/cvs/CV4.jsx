@@ -123,7 +123,7 @@ export default function CV4({info}) {
 					<>
 						<h3 className="text-3xl font-bold">Compétences</h3>
 						<div
-							className="prose prose-sm"
+							className="prose prose-sm text-current"
 							dangerouslySetInnerHTML={{
 								__html: filterHTML(info.skills),
 							}}

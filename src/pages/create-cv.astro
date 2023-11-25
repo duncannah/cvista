@@ -1,12 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+import TemplatePicker from "../components/TemplatePicker.astro";
 import CV from "../components/cv";
 import EditInfo from "../components/EditInfo.jsx";
 
 const cvPlaceholder = {
-	template: "minimal",
-
 	name: "John Doe",
 	title: "Développeur Web",
 	address: "Av. Emile Vandervelde 80, 1200 Woluwe-Saint-Lambert",
@@ -78,14 +77,33 @@ const cvPlaceholder = {
 ---
 
 <Layout>
-	<div class="content flex flex-col md:flex-row gap-4 md:items-center">
-		<EditInfo placeholder={cvPlaceholder} client:load />
-		<CV
-			placeholder={cvPlaceholder}
-			className="max-w-full md:max-w-[40%]"
-			id="cv"
-			client:load
-		/>
+	<div class="content">
+		<div class="flex justify-end gap-4 mb-4">
+			<button
+				class="btn"
+				title="Réinitialiser"
+				onclick="window.localStorage.clear(); window.location.reload();"
+			>
+				Réinitialiser
+			</button>
+			<button
+				class="btn btn-primary"
+				onclick="window.print();"
+				title="Imprimer"
+			>
+				Imprimer
+			</button>
+			<TemplatePicker />
+		</div>
+		<div class="flex flex-col lg:flex-row gap-8 items-start">
+			<EditInfo placeholder={cvPlaceholder} client:load />
+			<CV
+				placeholder={cvPlaceholder}
+				className="max-w-full lg:max-w-[40%] sticky top-36"
+				id="cv"
+				client:load
+			/>
+		</div>
 	</div>
 </Layout>
 

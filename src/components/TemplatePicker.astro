@@ -1,0 +1,69 @@
+---
+/**
+ * We're using an Astro component instead of a React component to demonstrate
+ * how Astro can work with any framework.
+ */
+import {Image} from "astro:assets";
+
+import CV1 from "../images/cv1.png";
+import CV2 from "../images/cv2.png";
+import CV3 from "../images/cv3.png";
+import CV4 from "../images/cv4.png";
+import CV5 from "../images/cv5.png";
+import CV6 from "../images/cv6.png";
+import CV7 from "../images/cv7.png";
+
+const cvs = [CV1, CV2, CV3, CV4, CV5, CV6, CV7];
+---
+
+<label class="btn btn-secondary" for="template-picker">Choisir modèle</label>
+<input class="modal-state" id="template-picker" type="checkbox" />
+<div class="modal">
+	<label class="modal-overlay" for="template-picker"></label>
+	<div class="modal-content flex flex-col gap-5">
+		<label
+			for="template-picker"
+			class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+			>✕</label
+		>
+		<h2 class="text-xl">Choisir modèle</h2>
+		<div class="grid grid-cols-3 gap-5">
+			{
+				cvs.map((cv, i) => (
+					<label class="flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform hover:shadow-lg">
+						<Image
+							src={cv}
+							alt={`Modèle ${i + 1}`}
+							width={200}
+							height={300}
+							class="rounded-lg"
+						/>
+						<input
+							type="radio"
+							name="template"
+							value={i + 1}
+							class="hidden template-option"
+						/>
+					</label>
+				))
+			}
+		</div>
+	</div>
+</div>
+
+<script>
+	document.querySelectorAll(".template-option").forEach((el) => {
+		el.addEventListener("change", (e: any) => {
+			console.log(e);
+
+			const template = e.target.value;
+			const data = JSON.parse(localStorage.getItem("userData"));
+
+			data.template = template;
+			localStorage.setItem("userData", JSON.stringify(data));
+
+			// @ts-ignore
+			document.getElementById("template-picker").checked = false;
+		});
+	});
+</script>

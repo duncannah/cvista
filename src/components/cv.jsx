@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-import CVMinimal from "./cvs/CVMinimal.jsx";
+import CV1 from "./cvs/CV1.jsx";
 import CV2 from "./cvs/CV2.jsx";
 import CV3 from "./cvs/CV3.jsx";
 import CV4 from "./cvs/CV4.jsx";
@@ -11,7 +11,7 @@ import CV7 from "./cvs/CV7.jsx";
 import usePrintTitle from "../hooks/usePrintTitle.js";
 
 export const CVs = {
-	minimal: CVMinimal,
+	1: CV1,
 	2: CV2,
 	3: CV3,
 	4: CV4,
@@ -88,7 +88,7 @@ export default function CV({placeholder, ...props}) {
 								info: userData,
 							})
 						) : (
-							<CVMinimal info={userData} />
+							<CV1 info={userData} />
 						)
 					) : (
 						<h5>Chargement...</h5>

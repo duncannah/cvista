@@ -1,32 +1,18 @@
-import useGoogleFont from "../../hooks/useGoogleFont.js";
 import {filterHTML} from "../cv.jsx";
 
-export default function CV2({info}) {
-	useGoogleFont("Lato", "400;500;700");
+/**
+ * A minimal CV template
+ */
 
+export default function CVMinimal({info}) {
 	return (
-		<div
-			className="text-neutral-800 flex flex-col gap-4 p-8 font-['Lato']
-			 [&>h3:before]:w-2 [&>h3:before]:bg-green-300 [&>h3:before]:content-[''] [&>h3]:flex [&>h3]:gap-2
-		"
-		>
-			<div className="flex bg-green-300">
-				{info.photo && (
-					<img
-						className="aspect-square h-48 object-cover"
-						src={info.photo}
-						alt=""
-					/>
-				)}
-				<div className="flex flex-col justify-between p-4">
-					<div>
-						<h1 className="text-6xl font-bold">
-							{info.name || "..."}
-						</h1>
-						<h2 className="mb-1 text-4xl font-medium">
-							{info.title || "..."}
-						</h2>
-					</div>
+		<div className="text-neutral-800 flex flex-col gap-4 p-8">
+			<div className="flex items-center justify-between">
+				<div>
+					<h1 className="text-6xl font-bold">{info.name || "..."}</h1>
+					<h2 className="mb-1 text-4xl font-medium">
+						{info.title || "..."}
+					</h2>
 					<div className="text-sm">
 						{info.address && (
 							<div className="mb-1">{info.address}</div>
@@ -46,11 +32,15 @@ export default function CV2({info}) {
 						</div>
 					</div>
 				</div>
+				{info.photo && (
+					<img
+						className="aspect-square h-32 object-cover"
+						src={info.photo}
+						alt=""
+					/>
+				)}
 			</div>
-
-			{info.statement && (
-				<div className="text-center text-lg">{info.statement}</div>
-			)}
+			{info.statement && <div className="text-lg">{info.statement}</div>}
 
 			{info.experience.length > 0 && (
 				<>
@@ -80,7 +70,6 @@ export default function CV2({info}) {
 			{info.education.length > 0 && (
 				<>
 					<h3 className="text-3xl font-bold">Formation</h3>
-
 					{info.education.map((education) => (
 						<div>
 							<div className="flex items-end justify-between">
@@ -106,14 +95,13 @@ export default function CV2({info}) {
 			{info.languages.length > 0 && (
 				<>
 					<h3 className="text-3xl font-bold">Langues</h3>
-
 					<div className="grid grid-cols-2 gap-4">
 						{info.languages.map((language) => (
 							<div className="flex items-center justify-between gap-4">
 								<h4 className="text-medium font-bold">
 									{language.language}
 								</h4>
-								<div className="h-px grow rounded-full bg-green-300"></div>
+								<div className="h-px grow rounded-full bg-gray-300"></div>
 								<h5 className="font-medium">
 									{language.level}
 								</h5>

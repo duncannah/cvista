@@ -109,7 +109,7 @@ export default function CV3({info}) {
 			{info.skills.length > 0 && (
 				<Section title="Compétences">
 					<div
-						className="prose prose-sm"
+						className="prose prose-sm text-current"
 						dangerouslySetInnerHTML={{
 							__html: filterHTML(info.skills),
 						}}
