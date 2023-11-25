@@ -1,4 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
+import {filterHTML} from "../CV.jsx";
 
 export default function CV5({info}) {
 	useGoogleFont("Barlow", "400;500;700");
@@ -8,7 +9,7 @@ export default function CV5({info}) {
 			<div className="flex shrink-0 items-center bg-blue-500">
 				{info.photo && (
 					<img
-						className="aspect-square h-48 border-r-4 border-white"
+						className="aspect-square h-48 border-r-4 border-white object-cover"
 						src={info.photo}
 						alt=""
 					/>
@@ -23,10 +24,10 @@ export default function CV5({info}) {
 											{index === 0 && <br />}
 										</>
 								  ))
-								: "no name"}
+								: "..."}
 						</h1>
 						<h2 className="text-xl font-medium">
-							{info.title || "no title"}
+							{info.title || "..."}
 						</h2>
 					</div>
 					<div className="flex flex-col text-sm">
@@ -101,13 +102,12 @@ export default function CV5({info}) {
 				</div>
 
 				<h3 className="text-2xl font-bold">Compétences</h3>
-				<div>
-					<ul>
-						{info.skills.map((skill) => (
-							<li className="text-lg">{skill}</li>
-						))}
-					</ul>
-				</div>
+				<div
+					className="prose prose-sm"
+					dangerouslySetInnerHTML={{
+						__html: filterHTML(info.skills),
+					}}
+				/>
 			</div>
 		</div>
 	);

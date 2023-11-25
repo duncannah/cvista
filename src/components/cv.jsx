@@ -20,20 +20,41 @@ export const CVs = {
 	7: CV7,
 };
 
-export default function CV(props) {
-	const [userData, setUserData] = useState(props.info);
+export const filterHTML = (html) => {
+	if (typeof DOMParser === "undefined") return html;
+
+	const doc = new DOMParser().parseFromString(html, "text/html");
+	doc.body
+		.querySelectorAll(
+			"*:not(a):not(b):not(i):not(u):not(strike):not(ul):not(ol):not(li):not(div)",
+		)
+		.forEach((node) => {
+			node.replaceWith(node.textContent);
+		});
+
+	doc.body
+		.querySelectorAll("*:not(a)")
+		.forEach((node) =>
+			[...node.attributes].forEach((attr) =>
+				node.removeAttribute(attr.name),
+			),
+		);
+
+	return doc.body.innerHTML || "";
+};
+
+export default function CV({placeholder, ...props}) {
+	const [userData, setUserData] = useState(placeholder);
 
 	const loadSavedData = () => {
 		const data = JSON.parse(localStorage.getItem("userData"));
-		if (data) {
-			setUserData(data);
-		}
+		if (data) setUserData({...placeholder, ...data});
 	};
 
 	useEffect(() => {
 		loadSavedData();
 
-		setInterval(loadSavedData, 2000);
+		setInterval(loadSavedData, 500);
 	}, []);
 
 	usePrintTitle(userData?.name ? `${userData.name} - Curriculum Vitae` : "");
@@ -61,7 +82,7 @@ export default function CV(props) {
 					height="100%"
 					xmlns="http://www.w3.org/1999/xhtml"
 				>
-					{userData !== null ? (
+					{userData ? (
 						CVs[userData.template] ? (
 							React.createElement(CVs[userData.template], {
 								info: userData,

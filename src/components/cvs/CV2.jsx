@@ -1,4 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
+import {filterHTML} from "../CV.jsx";
 
 export default function CV2({info}) {
 	useGoogleFont("Lato", "400;500;700");
@@ -12,7 +13,7 @@ export default function CV2({info}) {
 			<div className="flex bg-green-300">
 				{info.photo && (
 					<img
-						className="aspect-square h-48"
+						className="aspect-square h-48 object-cover"
 						src={info.photo}
 						alt=""
 					/>
@@ -20,10 +21,10 @@ export default function CV2({info}) {
 				<div className="flex flex-col justify-between p-4">
 					<div>
 						<h1 className="text-6xl font-bold">
-							{info.name || "no name"}
+							{info.name || "..."}
 						</h1>
 						<h2 className="mb-1 text-4xl font-medium">
-							{info.title || "no title"}
+							{info.title || "..."}
 						</h2>
 					</div>
 					<div className="text-sm">
@@ -46,69 +47,93 @@ export default function CV2({info}) {
 					</div>
 				</div>
 			</div>
+
 			{info.statement && (
 				<div className="text-center text-lg">{info.statement}</div>
 			)}
 
-			<h3 className="text-3xl font-bold">Expérience</h3>
-			{info.experience.map((experience) => (
-				<div>
-					<div className="flex items-end justify-between">
+			{info.experience.length > 0 && (
+				<>
+					<h3 className="text-3xl font-bold">Expérience</h3>
+					{info.experience.map((experience) => (
 						<div>
-							<h4 className="text-lg font-bold">
-								{experience.company}
-							</h4>
-							<h5 className="font-medium">{experience.role}</h5>
+							<div className="flex items-end justify-between">
+								<div>
+									<h4 className="text-lg font-bold">
+										{experience.company}
+									</h4>
+									<h5 className="font-medium">
+										{experience.role}
+									</h5>
+								</div>
+								<p>
+									{experience.startDate} {" – "}{" "}
+									{experience.endDate}
+								</p>
+							</div>
+							<p className="text-sm">{experience.description}</p>
 						</div>
-						<p>
-							{experience.startDate} {" – "} {experience.endDate}
-						</p>
-					</div>
-					<p className="text-sm">{experience.description}</p>
-				</div>
-			))}
-
-			<h3 className="text-3xl font-bold">Formation</h3>
-
-			{info.education.map((education) => (
-				<div>
-					<div className="flex items-end justify-between">
-						<div>
-							<h4 className="text-lg font-bold">
-								{education.degree}
-							</h4>
-							<h5 className="font-medium">{education.school}</h5>
-						</div>
-						<p>
-							{education.startDate} {" – "} {education.endDate}
-						</p>
-					</div>
-					<p className="text-sm">{education.description}</p>
-				</div>
-			))}
-
-			<h3 className="text-3xl font-bold">Langues</h3>
-
-			<div className="grid grid-cols-2 gap-4">
-				{info.languages.map((language) => (
-					<div className="flex items-center justify-between gap-4">
-						<h4 className="text-medium font-bold">
-							{language.language}
-						</h4>
-						<div className="h-px grow rounded-full bg-green-300"></div>
-						<h5 className="font-medium">{language.level}</h5>
-					</div>
-				))}
-			</div>
-
-			<h3 className="text-3xl font-bold">Compétences</h3>
-			<div>
-				<ul>
-					{info.skills.map((skill) => (
-						<li className="text-lg">{skill}</li>
 					))}
-				</ul>
-			</div>
+				</>
+			)}
+
+			{info.education.length > 0 && (
+				<>
+					<h3 className="text-3xl font-bold">Formation</h3>
+
+					{info.education.map((education) => (
+						<div>
+							<div className="flex items-end justify-between">
+								<div>
+									<h4 className="text-lg font-bold">
+										{education.degree}
+									</h4>
+									<h5 className="font-medium">
+										{education.school}
+									</h5>
+								</div>
+								<p>
+									{education.startDate} {" – "}{" "}
+									{education.endDate}
+								</p>
+							</div>
+							<p className="text-sm">{education.description}</p>
+						</div>
+					))}
+				</>
+			)}
+
+			{info.languages.length > 0 && (
+				<>
+					<h3 className="text-3xl font-bold">Langues</h3>
+
+					<div className="grid grid-cols-2 gap-4">
+						{info.languages.map((language) => (
+							<div className="flex items-center justify-between gap-4">
+								<h4 className="text-medium font-bold">
+									{language.language}
+								</h4>
+								<div className="h-px grow rounded-full bg-green-300"></div>
+								<h5 className="font-medium">
+									{language.level}
+								</h5>
+							</div>
+						))}
+					</div>
+				</>
+			)}
+
+			{info.skills.length > 0 && (
+				<>
+					<h3 className="text-3xl font-bold">Compétences</h3>
+					<div
+						className="prose prose-sm"
+						dangerouslySetInnerHTML={{
+							__html: filterHTML(info.skills),
+						}}
+					/>
+				</>
+			)}
 		</div>
 	);
 }

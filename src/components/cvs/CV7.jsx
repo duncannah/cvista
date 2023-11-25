@@ -1,4 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
+import {filterHTML} from "../CV.jsx";
 
 function Section({title, children}) {
 	return (
@@ -19,7 +20,7 @@ export default function CV7({info}) {
 		<div className="flex min-h-full bg-zinc-950 p-6 font-['Epilogue'] text-white">
 			<div className="flex min-h-full flex-col gap-12 border border-white p-6">
 				<div className="flex justify-between gap-8">
-					<h2>{info.title || "no title"}</h2>
+					<h2>{info.title || "..."}</h2>
 					<div>
 						{info.address && <div>{info.address}</div>}
 						<div className="flex flex-wrap justify-end gap-4">
@@ -40,7 +41,7 @@ export default function CV7({info}) {
 				<div className="flex items-end gap-8 font-['Playfair_Display']">
 					{info.photo && (
 						<img
-							className="aspect-square h-32"
+							className="aspect-square h-32 object-cover"
 							src={info.photo}
 							alt=""
 						/>
@@ -53,7 +54,7 @@ export default function CV7({info}) {
 										{index === 0 && <br />}
 									</>
 							  ))
-							: "no name"}
+							: "..."}
 					</h1>
 				</div>
 				{info.statement && (
@@ -118,13 +119,12 @@ export default function CV7({info}) {
 				</Section>
 
 				<Section title="Compétences">
-					<div>
-						<ul>
-							{info.skills.map((skill) => (
-								<li className="text-lg">{skill}</li>
-							))}
-						</ul>
-					</div>
+					<div
+						className="prose prose-sm"
+						dangerouslySetInnerHTML={{
+							__html: filterHTML(info.skills),
+						}}
+					/>
 				</Section>
 			</div>
 		</div>

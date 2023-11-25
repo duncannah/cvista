@@ -1,356 +1,275 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
+import Editor from "react-simple-wysiwyg";
 
-const EditInfo = (props) => {
-	const [userData, setUserData] = useState({
-		name: "",
-		title: "",
-		phone: "",
-		email: "",
-		experience: [],
-		skills: [],
-	});
-	const [experience, setExperience] = useState({
-		company: "",
-		role: "",
-		startDate: "",
-		endDate: "",
-		description: "",
-	});
-	const [skill, setSkill] = useState("");
-	// load user data from localStorage
-	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem("userData"));
-		if (data != null && data != undefined) {
-			setUserData(data);
-		}
-	}, []); // [] forces useEffect to only run once when the page loads.
-
-	// update localStorage when userData is updated. Sort of.
-	useEffect(() => {
-		if (
-			userData.name !== "" ||
-			userData.title !== "" ||
-			userData.email !== "" ||
-			userData.phone !== ""
-		) {
-			localStorage.setItem("userData", JSON.stringify(userData));
-		}
-	});
-
-	const updateUser = () => {
-		setUserData({...userData, [event.target.name]: event.target.value});
-	};
-
-	const submitExperience = () => {
-		setUserData({
+const MultipleItemSection = ({
+	placeholder,
+	userData,
+	setUserData,
+	title,
+	itemKey,
+	inputs,
+}) => {
+	const _addItem = () => {
+		setUserData((userData) => ({
 			...userData,
-			experience: [...userData.experience, experience],
-		});
-		setExperience({
-			company: "",
-			role: "",
-			startDate: "",
-			endDate: "",
-			description: "",
-		});
+			[itemKey]: [...userData[itemKey], placeholder[itemKey][0]],
+		}));
 	};
 
-	const updateExperience = () => {
-		const newField = event.target.value;
-		setExperience({...experience, [event.target.name]: newField});
-	};
-	const deleteExperience = () => {
-		const newExperiences = [];
-		for (let elt in userData.experience) {
-			if (elt !== event.target.id) {
-				newExperiences.push(userData.experience[elt]);
-			}
-		}
-		setUserData({...userData, experience: newExperiences});
+	const _removeItem = (i) => () => {
+		setUserData((userData) => ({
+			...userData,
+			[itemKey]: userData[itemKey].filter((item, index) => index != i),
+		}));
 	};
 
-	const updateSkill = () => {
-		setSkill(event.target.value);
-	};
-
-	const submitSkill = () => {
-		console.log(skill);
-		setUserData({...userData, skills: [...userData.skills, skill]});
-		//setSkill("");
-	};
-
-	const deleteSkill = () => {
-		const newSkills = [];
-		for (let i in userData.skills) {
-			if (i != event.target.value) {
-				newSkills.push(userData.skills[i]);
-			}
-		}
-		setUserData({...userData, skills: newSkills});
+	const _handleChange = (i) => (e) => {
+		setUserData((userData) => ({
+			...userData,
+			[itemKey]: userData[itemKey].map((item, index) =>
+				index == i ? {...item, [e.target.name]: e.target.value} : item,
+			),
+		}));
 	};
 
 	return (
-		<div
-			className={
-				(props.width === "full" ? "" : "w-1/2") +
-				" m-auto flex flex-col justify-center"
-			}
-		>
-			<h3 className="text-lg font-bold">Informations générales</h3>
-			<form
-				className="m-auto flex w-1/2 flex-col justify-center"
-				onChange={updateUser}
-			>
-				<input
-					type="text"
-					value={userData.name || ""}
-					onChange={() => {}}
-					placeholder="your name"
-					name="name"
-					className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-				/>
-				<input
-					type="text"
-					value={userData.title || ""}
-					onChange={() => {}}
-					placeholder="your title"
-					name="title"
-					className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-				/>
-				<input
-					type="email"
-					value={userData.email || ""}
-					onChange={() => {}}
-					placeholder="your email"
-					name="email"
-					className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-				/>
-				<input
-					type="text"
-					value={userData.phone || ""}
-					onChange={() => {}}
-					placeholder="your phone number"
-					name="phone"
-					className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-				/>
-			</form>
-			<h3 className="text-lg font-bold">Experiences</h3>
-			{props.width === "full" ? (
-				<form onChange={updateExperience}>
-					<table>
-						<thead>
-							<tr>
-								<th>Entreprise</th>
-								<th>Role</th>
-								<th>date de début</th>
-								<th>date de fin</th>
-								<th>description</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							{userData.experience.map((experience, index) => (
-								<tr>
-									<td>{experience.company}</td>
-									<td>{experience.role}</td>
-									<td>{experience.startDate}</td>
-									<td>{experience.endDate}</td>
-									<td>{experience.description}</td>
-									<td>
-										<button
-											onClick={deleteExperience}
-											id={index}
-											className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-										>
-											{" "}
-											-{" "}
-										</button>
-									</td>
-								</tr>
-							))}
-							<tr class="border-top border-1 border-solid">
-								<td>
-									<input
-										type="text"
-										placeholder="Entreprise"
-										name="company"
-										value={experience.company}
-										onChange={() => {}}
-										className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-									/>
-								</td>
-								<td>
-									<input
-										type="text"
-										placeholder="Role"
-										name="role"
-										value={experience.role}
-										onChange={() => {}}
-										className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-									/>
-								</td>
-								<td>
-									<input
-										type="text"
-										placeholder="date de début"
-										name="startDate"
-										value={experience.startDate}
-										onChange={() => {}}
-										className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-									/>
-								</td>
-								<td>
-									<input
-										type="text"
-										placeholder="date de fin"
-										name="endDate"
-										value={experience.endDate}
-										onChange={() => {}}
-										className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-									/>
-								</td>
-								<td>
-									<input
-										type="text"
-										placeholder="description"
-										name="description"
-										value={experience.description}
-										onChange={() => {}}
-										className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-									/>
-								</td>
-								<td>
-									<input
-										type="button"
-										value="+"
-										onClick={submitExperience}
-										onChange={() => {}}
-										className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-									/>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-			) : (
-				<div>
-					{userData.experience.map((experience, index) => (
-						<div
-							className="rounded-25 flex flex-col transition duration-300 ease-in-out hover:bg-gray-100"
-							id={index}
-							onClick={deleteExperience}
-						>
-							<h4 id={index} className="text-lg font-bold">
-								{experience.company}
-							</h4>
-							<h5 id={index} className="text-md font-bold">
-								{experience.role}
-							</h5>
-							<p id={index} className="text-sm">
-								{experience.startDate} {" – "}{" "}
-								{experience.endDate}
-							</p>
-							<p id={index} className="text-sm">
-								{experience.description}
-							</p>
-						</div>
-					))}
-					<form onChange={updateExperience} className="flex flex-col">
-						<input
-							type="text"
-							placeholder="Entreprise"
-							name="company"
-							value={experience.company}
-							onChange={() => {}}
-							className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-						/>
-						<input
-							type="text"
-							placeholder="Role"
-							name="role"
-							value={experience.role}
-							onChange={() => {}}
-							className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-						/>
-						<input
-							type="text"
-							placeholder="date de début"
-							name="startDate"
-							value={experience.startDate}
-							onChange={() => {}}
-							className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-						/>
-						<input
-							type="text"
-							placeholder="date de fin"
-							name="endDate"
-							value={experience.endDate}
-							onChange={() => {}}
-							className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-						/>
-						<input
-							type="text"
-							placeholder="description"
-							name="description"
-							value={experience.description}
-							onChange={() => {}}
-							className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-						/>
-						<input
-							type="button"
-							value="+"
-							onClick={submitExperience}
-							onChange={() => {}}
-							className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-						/>
-					</form>
-				</div>
-			)}
+		<div className="form-field">
+			<label className="form-label">
+				{title}
 
-			<h3 className="text-lg font-bold">Capacités</h3>
-			<form>
-				<table className="m-auto w-1/2">
-					<tbody>
-						{userData.skills.map((text, index) => (
-							<tr>
-								<td>{text}</td>
-								<td>
-									<button
-										onClick={deleteSkill}
-										value={index}
-										className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-									>
-										{" "}
-										-{" "}
-									</button>
-								</td>
-							</tr>
-						))}
-						<tr>
-							<td>
+				<button
+					className="btn btn-outline-secondary btn-xs form-label-alt"
+					onClick={_addItem}
+				>
+					+
+				</button>
+			</label>
+
+			{userData[itemKey]?.map((item, index) => (
+				<div
+					className="form-group relative rounded-xl bg-backgroundSecondary p-4"
+					key={index}
+				>
+					<div className="absolute right-0 top-0 p-2">
+						<button
+							className="btn btn-outline-error btn-xs"
+							onClick={_removeItem(index)}
+						>
+							-
+						</button>
+					</div>
+					<div className="form-group grid grid-cols-1 gap-4 sm:grid-cols-2">
+						{inputs.map(([key, label]) => (
+							<div className="form-field grow" key={key}>
+								<label className="form-label">{label}</label>
+
 								<input
+									placeholder={placeholder[key]}
+									value={item[key] || ""}
+									name={key}
+									onChange={_handleChange(index)}
 									type="text"
-									onChange={updateSkill}
-									value={skill}
-									placeholder="capacité"
-									className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
+									className="input"
 								/>
-							</td>
-							<td>
-								<button
-									onClick={submitSkill}
-									className="m-2 justify-center rounded-full border-2 border-solid p-1 transition duration-300 ease-in-out hover:bg-gray-100"
-								>
-									{" "}
-									+{" "}
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
+							</div>
+						))}
+					</div>
+				</div>
+			))}
 		</div>
 	);
 };
 
-export default EditInfo;
+export default function EditInfo({placeholder}) {
+	const [userData, setUserData] = useState(placeholder);
+	const [dataLoaded, setDataLoaded] = useState(false);
+
+	useEffect(() => {
+		const data = JSON.parse(localStorage.getItem("userData"));
+		if (data != null && data != undefined) setUserData(data);
+
+		setDataLoaded(true);
+	}, []);
+
+	useEffect(() => {
+		if (dataLoaded)
+			localStorage.setItem("userData", JSON.stringify(userData));
+
+		console.log(userData);
+	}, [userData]);
+
+	const _handleChange = (e) => {
+		setUserData((userData) => ({
+			...userData,
+			[e.target.name]: e.target.value,
+		}));
+	};
+
+	const _handlePhoto = (e) => {
+		if (!e.target.files[0]) {
+			return setUserData((userData) => ({
+				...userData,
+				photo: "",
+			}));
+		}
+
+		const reader = new FileReader();
+		reader.readAsDataURL(e.target.files[0]);
+		reader.onloadend = () => {
+			setUserData((userData) => ({
+				...userData,
+				photo: reader.result,
+			}));
+		};
+	};
+
+	return (
+		<div className="flex grow flex-col justify-center">
+			<h3 className="text-lg font-bold">Informations</h3>
+			<div className="form-group">
+				<div className="flex flex-col gap-4 sm:flex-row">
+					<div className="form-field grow">
+						<label className="form-label">Nom</label>
+
+						<input
+							placeholder={placeholder.name}
+							value={userData.name || ""}
+							onChange={_handleChange}
+							name="name"
+							type="text"
+							className="input"
+						/>
+					</div>
+					<div className="form-field grow">
+						<label className="form-label">Titre du poste</label>
+
+						<input
+							placeholder={placeholder.title}
+							value={userData.title || ""}
+							onChange={_handleChange}
+							name="title"
+							type="text"
+							className="input"
+						/>
+					</div>
+					<div className="form-field">
+						<label className="form-label">Photo</label>
+						<input
+							type="file"
+							className="hidden"
+							id="file-photo"
+							accept="image/*"
+							onChange={_handlePhoto}
+						/>
+						<label htmlFor="file-photo" className="btn">
+							Choisir...
+						</label>
+					</div>
+				</div>
+				<div className="flex flex-col gap-4 sm:flex-row">
+					<div className="form-field grow">
+						<label className="form-label">Adresse</label>
+
+						<input
+							placeholder={placeholder.address}
+							value={userData.address || ""}
+							onChange={_handleChange}
+							name="address"
+							type="text"
+							className="input"
+						/>
+					</div>
+					<div className="form-field grow">
+						<label className="form-label">
+							Numéro de téléphone
+						</label>
+
+						<input
+							placeholder={placeholder.phone}
+							value={userData.phone || ""}
+							onChange={_handleChange}
+							name="phone"
+							type="text"
+							className="input"
+						/>
+					</div>
+					<div className="form-field grow">
+						<label className="form-label">Adresse email</label>
+
+						<input
+							placeholder={placeholder.email}
+							value={userData.email || ""}
+							onChange={_handleChange}
+							name="email"
+							type="text"
+							className="input"
+						/>
+					</div>
+				</div>
+				<div className="form-field">
+					<label className="form-label">Déclaration</label>
+					<textarea
+						className="textarea textarea-block"
+						placeholder={placeholder.statement}
+						value={userData.statement || ""}
+						name="statement"
+						onChange={_handleChange}
+					/>
+				</div>
+				<MultipleItemSection
+					{...{
+						placeholder,
+						userData,
+						setUserData,
+						itemKey: "experience",
+						title: "Expérience",
+						inputs: [
+							["role", "Rôle"],
+							["company", "Entreprise"],
+							["startDate", "Date de début"],
+							["endDate", "Date de fin"],
+						],
+					}}
+				/>
+				<MultipleItemSection
+					{...{
+						placeholder,
+						userData,
+						setUserData,
+						itemKey: "education",
+						title: "Formation",
+						inputs: [
+							["degree", "Diplôme"],
+							["school", "École"],
+							["startDate", "Date de début"],
+							["endDate", "Date de fin"],
+						],
+					}}
+				/>
+				<MultipleItemSection
+					{...{
+						placeholder,
+						userData,
+						setUserData,
+						itemKey: "languages",
+						title: "Langues",
+						inputs: [
+							["language", "Langue"],
+							["level", "Niveau"],
+						],
+					}}
+				/>
+				<div className="form-field">
+					<label className="form-label">Compétences</label>
+					<div className="prose prose-sm prose-neutral max-w-full dark:prose-invert">
+						<Editor
+							value={userData.skills || ""}
+							name="skills"
+							onChange={_handleChange}
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}

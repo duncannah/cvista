@@ -1,4 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
+import {filterHTML} from "../CV.jsx";
 
 function Section({title, children}) {
 	return (
@@ -22,15 +23,13 @@ export default function CV3({info}) {
 				<div className="flex flex-col items-center">
 					{info.photo && (
 						<img
-							className="aspect-square h-24 rounded-full"
+							className="aspect-square h-24 rounded-full object-cover"
 							src={info.photo}
 							alt=""
 						/>
 					)}
-					<h1 className="text-6xl font-bold">
-						{info.name || "no name"}
-					</h1>
-					<h2 className="text-3xl">{info.title || "no title"}</h2>
+					<h1 className="text-6xl font-bold">{info.name || "..."}</h1>
+					<h2 className="text-3xl">{info.title || "..."}</h2>
 				</div>
 				<div className="text-sm">
 					{info.address && <div className="mb-1">{info.address}</div>}
@@ -100,13 +99,12 @@ export default function CV3({info}) {
 			</Section>
 
 			<Section title="Compétences">
-				<div>
-					<ul>
-						{info.skills.map((skill) => (
-							<li className="text-lg">{skill}</li>
-						))}
-					</ul>
-				</div>
+				<div
+					className="prose prose-sm"
+					dangerouslySetInnerHTML={{
+						__html: filterHTML(info.skills),
+					}}
+				/>
 			</Section>
 		</div>
 	);

@@ -1,4 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
+import {filterHTML} from "../CV.jsx";
 
 export default function CV4({info}) {
 	useGoogleFont("IBM Plex Sans", "400;500;700");
@@ -9,17 +10,17 @@ export default function CV4({info}) {
 				<div className="flex flex-col items-center gap-4 text-center">
 					{info.photo && (
 						<img
-							className="aspect-square h-36 rounded-full shadow-xl"
+							className="aspect-square h-36 rounded-full object-cover shadow-xl"
 							src={info.photo}
 							alt=""
 						/>
 					)}
 					<div>
 						<h1 className="text-4xl font-bold">
-							{info.name || "no name"}
+							{info.name || "..."}
 						</h1>
 						<h2 className="mb-1 text-2xl font-medium">
-							{info.title || "no title"}
+							{info.title || "..."}
 						</h2>
 					</div>
 				</div>
@@ -106,13 +107,12 @@ export default function CV4({info}) {
 				))}
 
 				<h3 className="text-3xl font-bold">Compétences</h3>
-				<div>
-					<ul>
-						{info.skills.map((skill) => (
-							<li className="text-lg">{skill}</li>
-						))}
-					</ul>
-				</div>
+				<div
+					className="prose prose-sm"
+					dangerouslySetInnerHTML={{
+						__html: filterHTML(info.skills),
+					}}
+				/>
 			</div>
 		</div>
 	);

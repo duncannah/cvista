@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import CV from "../components/cv";
 import EditInfo from "../components/EditInfo.jsx";
 
-const cvInfo = {
+const cvPlaceholder = {
 	template: "minimal",
 
 	name: "John Doe",
@@ -13,7 +13,7 @@ const cvInfo = {
 	email: "john@doe.com",
 	phone: "+32 123 45 67 89",
 
-	photo: "https://i.pravatar.cc/300",
+	photo: "",
 
 	statement:
 		"Diplômé récemment en informatique, je suis un développeur junior passionné par la création de solutions innovantes. Fort d'une formation solide en programmation et d'une expérience pratique acquise au cours de mes études, je suis désireux de mettre en œuvre mes compétences techniques fraîchement acquises dans un environnement professionnel.",
@@ -63,14 +63,29 @@ const cvInfo = {
 		},
 	],
 
-	skills: ["skill 1", "skill 2", "skill 3", "skill 4"],
+	skills: `
+		<ul>
+			<li>HTML</li>
+			<li>CSS</li>
+			<li>JavaScript</li>
+			<li>React</li>
+			<li>Node.js</li>
+			<li>Git</li>
+			<li>...</li>
+		</ul>
+	`,
 };
 ---
 
 <Layout>
-	<div class="content flex flex-row">
-		<EditInfo class="w-1/2" width="half" info={cvInfo} client:load />
-		<CV info={cvInfo} className="w-2/5" id="cv" client:load />
+	<div class="content flex flex-col md:flex-row gap-4 md:items-center">
+		<EditInfo placeholder={cvPlaceholder} client:load />
+		<CV
+			placeholder={cvPlaceholder}
+			className="max-w-full md:max-w-[40%]"
+			id="cv"
+			client:load
+		/>
 	</div>
 </Layout>
 
@@ -107,12 +122,13 @@ const cvInfo = {
 		}
 
 		#cv {
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
+			width: 100% !important;
+			height: 100% !important;
+			overflow: hidden !important;
+			max-width: 100vw !important;
 
-			position: fixed;
-			inset: 0;
+			position: fixed !important;
+			inset: 0 !important;
 		}
 	}
 </style>

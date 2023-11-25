@@ -1,4 +1,5 @@
 import useGoogleFont from "../../hooks/useGoogleFont.js";
+import {filterHTML} from "../CV.jsx";
 
 function Section({title, children}) {
 	return (
@@ -23,7 +24,7 @@ export default function CV6({info}) {
 							}}
 						>
 							<img
-								className="float-right -mr-8 -mt-8 aspect-square h-[300px]"
+								className="float-right -mr-8 -mt-8 aspect-square h-[300px] object-cover"
 								src={info.photo}
 								alt=""
 								style={{
@@ -35,11 +36,9 @@ export default function CV6({info}) {
 							/>
 						</div>
 					)}
-					<h1 className="text-7xl font-bold">
-						{info.name || "no name"}
-					</h1>
+					<h1 className="text-7xl font-bold">{info.name || "..."}</h1>
 					<h2 className="text-2xl tracking-wider">
-						{info.title || "no title"}
+						{info.title || "..."}
 					</h2>
 					{info.statement && (
 						<div className="mt-4 text-xl">{info.statement}</div>
@@ -87,11 +86,12 @@ export default function CV6({info}) {
 					</Section>
 
 					<Section title="Compétences">
-						<ul>
-							{info.skills.map((skill) => (
-								<li className="text-lg">{skill}</li>
-							))}
-						</ul>
+						<div
+							className="prose prose-sm"
+							dangerouslySetInnerHTML={{
+								__html: filterHTML(info.skills),
+							}}
+						/>
 					</Section>
 				</div>
 				<div className="flex w-56 shrink-0 flex-col gap-4">
