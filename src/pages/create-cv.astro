@@ -5,6 +5,8 @@ import TemplatePicker from "../components/TemplatePicker.astro";
 import CV from "../components/cv";
 import EditInfo from "../components/EditInfo.jsx";
 
+import examplePhoto from "../images/example-photo.png";
+
 const cvPlaceholder = {
 	name: "John Doe",
 	title: "Développeur Web",
@@ -12,7 +14,7 @@ const cvPlaceholder = {
 	email: "john@doe.com",
 	phone: "+32 123 45 67 89",
 
-	photo: "",
+	photo: examplePhoto.src,
 
 	statement:
 		"Diplômé récemment en informatique, je suis un développeur junior passionné par la création de solutions innovantes. Fort d'une formation solide en programmation et d'une expérience pratique acquise au cours de mes études, je suis désireux de mettre en œuvre mes compétences techniques fraîchement acquises dans un environnement professionnel.",
