@@ -5,10 +5,16 @@ import Layout from "../../layouts/Layout.astro";
 export async function getStaticPaths() {
 	const blogEntries = await getCollection("guide");
 
-	return blogEntries.map((entry) => ({
-		params: {slug: entry.slug.substring(3)},
-		props: {entry},
-	}));
+	return blogEntries.map((entry) => {
+		let slug = entry.slug.substring(3);
+
+		if (slug === "index") slug = undefined;
+
+		return {
+			params: {slug},
+			props: {entry},
+		};
+	});
 }
 
 const paths = await getStaticPaths();
@@ -31,7 +37,9 @@ const {Content} = await entry.render();
 								paths.map((page) => (
 									<li>
 										<a
-											href={`./guide/${page.params.slug}`}
+											href={`./guide/${
+												page.params.slug || ""
+											}`}
 											class={`menu-item ${
 												page.params.slug ===
 												entry.slug.substring(3)
