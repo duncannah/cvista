@@ -262,11 +262,13 @@ export default function EditInfo({placeholder}) {
 				<div className="form-field">
 					<label className="form-label">Compétences</label>
 					<div className="prose prose-sm prose-neutral max-w-full dark:prose-invert">
-						<Editor
-							value={userData.skills || ""}
-							name="skills"
-							onChange={_handleChange}
-						/>
+						{dataLoaded && (
+							<Editor
+								value={userData.skills || ""}
+								name="skills"
+								onChange={_handleChange}
+							/>
+						)}
 					</div>
 				</div>
 			</div>
