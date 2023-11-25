@@ -6,11 +6,15 @@ import {ViewTransitions} from "astro:transitions";
 
 <html lang="fr">
 	<head>
+		<base href=`${import.meta.env.BASE_URL}/` />
 		<title>CVista</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<base href=`${import.meta.env.BASE_URL}/` />
+		<meta
+			name="description"
+			content="CVista est un outil de création de CV en ligne. Commencez à créer votre CV dès maintenant."
+		/>
 		<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 		<link rel="preconnect" href="https://rsms.me/" />
 		<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
