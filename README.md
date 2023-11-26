@@ -1,6 +1,8 @@
 # CVista
 
-[![GitHub Pages](https://img.shields.io/github/deployments/duncannah/CVista/github-pages?label=GitHub%20Pages&logo=github&logoColor=white)](https://duncannah.github.io/CVista/)
+[![GitHub Pages](https://img.shields.io/github/deployments/duncannah/CVista/github-pages?label=GitHub%20Pages&logo=github&logoColor=white)](https://duncannah.github.io/cvista)
+
+[https://duncannah.github.io/cvista](https://duncannah.github.io/cvista)
 
 > Développé dans le cadre du cours de Web3. Il ne s'agit pas d'un projet personnel, ni d'un projet professionnel.
 
